@@ -21,7 +21,7 @@ class Team
     #[ORM\Column(length: 255)]
     private ?string $country = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $logo = null;
 
     /**
@@ -29,6 +29,12 @@ class Team
      */
     #[ORM\OneToMany(targetEntity: Driver::class, mappedBy: 'team')]
     private Collection $drivers;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $carImage = null;
+
+    #[ORM\Column(length: 7, nullable: true)]
+    private ?string $backgroundColor = null;
 
     public function __construct()
     {
@@ -69,7 +75,7 @@ class Team
         return $this->logo;
     }
 
-    public function setLogo(string $logo): static
+    public function setLogo(?string $logo): static
     {
         $this->logo = $logo;
 
@@ -102,6 +108,30 @@ class Team
                 $driver->setTeam(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCarImage(): ?string
+    {
+        return $this->carImage;
+    }
+
+    public function setCarImage(string $carImage): static
+    {
+        $this->carImage = $carImage;
+
+        return $this;
+    }
+
+    public function getBackgroundColor(): ?string
+    {
+        return $this->backgroundColor;
+    }
+
+    public function setBackgroundColor(?string $backgroundColor): static
+    {
+        $this->backgroundColor = $backgroundColor;
 
         return $this;
     }

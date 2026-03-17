@@ -3,9 +3,11 @@
 {% block title %}New DriverRating{% endblock %}
 
 {% block body %}
-    <h1>Create new DriverRating</h1>
+    <h1>Nouvelle note</h1>
 
     {{ include('driver_rating/_form.html.twig') }}
 
-    <a href="{{ path('app_driver_rating_index') }}">back to list</a>
+    <div class="page-actions">
+        <a href="{{ path('app_driver_rating_index') }}" class="btn btn-outline">← Retour</a>
+    </div>
 {% endblock %}

@@ -1,51 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Driver index{% endblock %}
+{% block title %}Pilotes{% endblock %}
 
 {% block body %}
-    <h1>Driver index</h1>
+    {% set flagCodes = {
+        'British': 'gb', 'French': 'fr', 'France': 'fr', 'Dutch': 'nl', 'German': 'de', 'Spain': 'es', 'Spanish': 'es',
+        'Italian': 'it', 'Italy': 'it', 'Australian': 'au', 'Canadian': 'ca', 'American': 'us', 'Brazilian': 'br',
+        'Monegasque': 'mc', 'Monaco': 'mc', 'Mexican': 'mx', 'Thai': 'th', 'Japanese': 'jp', 'China': 'cn', 'Chinese': 'cn',
+        'Danish': 'dk', 'Finnish': 'fi', 'New Zealander': 'nz', 'Austrian': 'at', 'Belgian': 'be', 'Swiss': 'ch'
+    } %}
+    <div class="driver-page">
+        <div class="page-header">
+            <h1>Pilotes</h1>
+        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Nationality</th>
-                <th>BirthDate</th>
-                <th>Number</th>
-                <th>Code</th>
-                <th>Photo</th>
-                <th>IsAlive</th>
-                <th>IsRetired</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for driver in drivers %}
-            <tr>
-                <td>{{ driver.id }}</td>
-                <td>{{ driver.firstName }}</td>
-                <td>{{ driver.lastName }}</td>
-                <td>{{ driver.nationality }}</td>
-                <td>{{ driver.birthDate ? driver.birthDate|date('Y-m-d') : '' }}</td>
-                <td>{{ driver.number }}</td>
-                <td>{{ driver.code }}</td>
-                <td>{{ driver.photo }}</td>
-                <td>{{ driver.isAlive ? 'Yes' : 'No' }}</td>
-                <td>{{ driver.isRetired ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_driver_show', {'id': driver.id}) }}">show</a>
-                    <a href="{{ path('app_driver_edit', {'id': driver.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="driver-grid">
+            {% for driver in drivers %}
+                <a href="{{ path('app_driver_show', {'id': driver.id}) }}" class="driver-card"{% if driver.team and driver.team.backgroundColor %} style="--team-color: {{ driver.team.backgroundColor }}"{% endif %}>
+                    <div class="driver-card-content">
+                        <div class="driver-card-left">
+                            <span class="driver-card-name">{{ driver.firstName }} {{ driver.lastName }}</span>
+                            <span class="driver-card-team">{{ driver.team ? driver.team.name : 'Sans écurie' }}</span>
+                            <span class="driver-card-number">{{ driver.number }}</span>
+                            {% if driver.nationality and driver.nationality in flagCodes %}
+                                <img src="https://flagcdn.com/w40/{{ flagCodes[driver.nationality] }}.png" alt="{{ driver.nationality }}" class="driver-card-flag" width="24" height="18">
+                            {% endif %}
+                        </div>
+                        <div class="driver-card-photo-wrap">
+                            {% if driver.photo %}
+                                <img src="{{ driver.photo }}" alt="{{ driver.firstName }} {{ driver.lastName }}" class="driver-card-photo">
+                            {% else %}
+                                <div class="driver-card-placeholder"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+            {% else %}
+                <p class="standings-empty">Aucun pilote pour le moment.</p>
+            {% endfor %}
+        </div>
 
-    <a href="{{ path('app_driver_new') }}">Create new</a>
+        <div class="page-actions">
+            <a href="{{ path('app_driver_new') }}" class="btn btn-f1">+ Nouveau pilote</a>
+        </div>
+    </div>
 {% endblock %}

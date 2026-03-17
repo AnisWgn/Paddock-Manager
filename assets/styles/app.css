@@ -1,3 +1,988 @@
+/* === F1 Theme === */
+:root {
+    --f1-red: #e10600;
+    --f1-red-dark: #b80500;
+    --f1-black: #15151e;
+    --f1-dark: #1e1e2a;
+    --f1-darker: #121219;
+    --f1-gray: #38383f;
+    --f1-gray-light: #58585f;
+    --f1-white: #ffffff;
+    --f1-off-white: #f0f0f0;
+    --f1-carbon: #2d2d35;
+    --f1-accent: #e10600;
+
+    --sidebar-width: 260px;
+    --border-radius: 6px;
+    --font: 'Titillium Web', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    background-color: skyblue;
+    font-family: var(--font);
+    background: var(--f1-black);
+    color: var(--f1-white);
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ===================== Layout ===================== */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-wrapper {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    padding: 2rem 2.5rem;
+}
+
+/* ===================== Sidebar ===================== */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--f1-darker);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid var(--f1-gray);
+}
+
+.sidebar-header {
+    padding: 1.5rem 1.25rem;
+    border-bottom: 3px solid var(--f1-red);
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.sidebar-logo svg { flex-shrink: 0; }
+
+.sidebar-title {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--f1-white);
+}
+
+.sidebar-title span {
+    color: var(--f1-red);
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 0.75rem 0;
+}
+
+.nav-list {
+    list-style: none;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.65);
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+}
+
+.nav-link:hover {
+    color: var(--f1-white);
+    background: rgba(255,255,255,0.04);
+    border-left-color: var(--f1-red);
+}
+
+.nav-link.active {
+    color: var(--f1-white);
+    background: rgba(225,6,0,0.12);
+    border-left-color: var(--f1-red);
+}
+
+.nav-icon {
+    font-size: 1.1rem;
+    width: 1.5rem;
+    text-align: center;
+}
+
+/* ===================== Home Hero ===================== */
+.hero {
+    background: linear-gradient(135deg, var(--f1-dark) 0%, var(--f1-black) 60%, rgba(225,6,0,0.15) 100%);
+    border-radius: var(--border-radius);
+    padding: 3rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--f1-gray);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: var(--f1-red);
+}
+
+.hero-badge {
+    display: inline-block;
+    background: var(--f1-red);
+    color: var(--f1-white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.3rem 0.75rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+}
+
+.hero h1 span { color: var(--f1-red); }
+
+.hero-subtitle {
+    color: rgba(255,255,255,0.6);
+    font-size: 1.05rem;
+    max-width: 500px;
+    line-height: 1.5;
+}
+
+/* ===================== Stats Bar ===================== */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat-card {
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    transition: border-color 0.2s;
+}
+
+.stat-card:hover {
+    border-color: var(--f1-red);
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--f1-red);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.stat-desc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+}
+
+/* ===================== Section Titles ===================== */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--f1-red);
+    display: inline-block;
+}
+
+/* ===================== Dashboard Cards ===================== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.dash-card {
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: transform 0.15s, border-color 0.2s;
+}
+
+.dash-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--f1-red);
+}
+
+.dash-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dash-card-icon {
+    font-size: 1.75rem;
+}
+
+.dash-card-arrow {
+    color: var(--f1-red);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.dash-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.dash-card p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.4;
+}
+
+/* ===================== Quick Actions ===================== */
+.quick-actions {
+    margin-top: 2rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+/* ===================== Buttons ===================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--border-radius);
+    font-family: var(--font);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+}
+
+.btn-f1 {
+    background: var(--f1-red);
+    color: var(--f1-white);
+}
+
+.btn-f1:hover {
+    background: var(--f1-red-dark);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--f1-white);
+    border: 1px solid var(--f1-gray);
+}
+
+.btn-outline:hover {
+    border-color: var(--f1-red);
+    color: var(--f1-red);
+}
+
+/* ===================== F1 Info Section ===================== */
+.f1-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.info-block {
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+}
+
+.info-block h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--f1-red);
+    margin-bottom: 0.75rem;
+}
+
+.info-block p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+}
+
+/* ===================== Tables ===================== */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--f1-dark);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid var(--f1-gray);
+}
+
+.table th,
+.table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--f1-gray);
+}
+
+.table th {
+    background: var(--f1-carbon);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.6);
+}
+
+.table td {
+    font-size: 0.9rem;
+}
+
+.table tbody tr:hover {
+    background: rgba(225,6,0,0.06);
+}
+
+.table a {
+    color: var(--f1-red);
+    font-weight: 600;
+    margin-right: 0.75rem;
+}
+
+.table a:hover {
+    text-decoration: underline;
+}
+
+/* ===================== Page Content ===================== */
+.page-content {
+    width: 100%;
+}
+
+.page-content h1 {
+    font-size: 1.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    font-size: 1.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.page-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.subtitle {
+    color: rgba(255,255,255,0.5);
+}
+
+.text-muted {
+    color: rgba(255,255,255,0.5);
+}
+
+/* ===================== Forms ===================== */
+.form-control,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="date"],
+input[type="search"],
+select,
+textarea {
+    background: var(--f1-carbon);
+    border: 1px solid var(--f1-gray);
+    border-radius: var(--border-radius);
+    color: var(--f1-white);
+    padding: 0.6rem 0.75rem;
+    font-family: var(--font);
+    font-size: 0.9rem;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--f1-red);
+}
+
+label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.7);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+/* ===================== Home image + standings ===================== */
+.home-hero-media {
+    margin-bottom: 2rem;
+}
+
+.home-hero-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 520px;
+    border-radius: 10px;
+    border: 1px solid var(--f1-gray);
+    background: var(--f1-dark);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.58);
+}
+
+.home-hero-image {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    display: block;
+}
+
+.home-hero-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    padding: 2rem 2rem 3.2rem;
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.9) 100%);
+    text-align: center;
+}
+
+.home-hero-overlay-content {
+    width: 100%;
+    text-align: center;
+}
+
+.home-hero-overlay h1,
+.home-hero-overlay p {
+    width: 100%;
+    max-width: 100%;
+}
+
+.home-hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.8rem;
+    margin-bottom: 0.85rem;
+    background: var(--f1-red);
+    color: var(--f1-white);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.home-hero-overlay h1 {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 0.6rem;
+}
+
+.home-hero-overlay p {
+    max-width: 100%;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 1rem;
+    margin: 0.6rem auto 0;
+}
+
+.home-intro {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.home-intro-text {
+    max-width: 720px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+}
+
+.home-intro-stats {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.mini-stat {
+    min-width: 110px;
+    padding: 0.9rem 1rem;
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-radius: 8px;
+}
+
+.mini-stat strong {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.mini-stat span {
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.standings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.standings-card {
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.standings-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--f1-gray);
+}
+
+.standings-kicker {
+    display: inline-block;
+    margin-bottom: 0.3rem;
+    color: var(--f1-red);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.standings-card-header h2 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.05;
+}
+
+.f1-standings-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.f1-standings-row {
+    display: grid;
+    grid-template-columns: 60px minmax(0, 1fr) 90px;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.f1-standings-row:hover {
+    background: rgba(225, 6, 0, 0.09);
+}
+
+.standing-position {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--f1-white);
+}
+
+.standing-main {
+    min-width: 0;
+}
+
+.standing-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.standing-meta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.3rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.8rem;
+}
+
+.standing-points {
+    text-align: right;
+}
+
+.standing-points strong {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.standing-points span {
+    color: var(--f1-red);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.standings-empty {
+    padding: 1.5rem;
+    color: rgba(255, 255, 255, 0.62);
+}
+
+/* ===================== Team Grid ===================== */
+.team-page {
+    margin: -2rem -2.5rem;
+    padding: 2rem 2.5rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.team-card {
+    --team-color: var(--f1-dark);
+    --color: rgba(114, 114, 114, 0.3);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--team-color);
+    background-image:
+        linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+    background-size: 55px 55px;
+    border: 1px solid var(--f1-gray);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: var(--f1-white);
+}
+
+.team-card:hover {
+    border-color: var(--f1-red);
+    transform: translateY(-3px);
+}
+
+.team-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1rem;
+}
+
+.team-card-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.team-card-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.team-card-image {
+    padding: 0.5rem 1rem 1rem;
+}
+
+.team-card-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.team-card-placeholder {
+    width: 100%;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+}
+
+.team-show-card {
+    --team-color: var(--f1-dark);
+    --color: rgba(114, 114, 114, 0.3);
+    background-color: var(--team-color);
+    background-image:
+        linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+    background-size: 55px 55px;
+    border: 1px solid var(--f1-gray);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.team-show-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.team-color-swatch {
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+.team-show-car img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    border-radius: 6px;
+}
+
+/* ===================== Driver Grid ===================== */
+.driver-page {
+    margin: -2rem -2.5rem;
+    padding: 2rem 2.5rem;
+}
+
+.driver-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.driver-card {
+    --team-color: var(--f1-dark);
+    --color: rgba(114, 114, 114, 0.3);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--team-color);
+    background-image:
+        linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+    background-size: 55px 55px;
+    border: 1px solid var(--f1-gray);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: var(--f1-white);
+    min-height: 140px;
+}
+
+.driver-card:hover {
+    border-color: var(--f1-red);
+    transform: translateY(-3px);
+}
+
+.driver-card-content {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.driver-card-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 1rem 0.85rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.driver-card-name {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.driver-card-team {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 0.15rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.driver-card-number {
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.driver-card-flag {
+    width: 24px;
+    height: 18px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-top: 0.35rem;
+}
+
+.driver-card-photo-wrap {
+    flex-shrink: 0;
+    width: 50%;
+    max-width: 140px;
+    min-height: 140px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.driver-card-photo {
+    width: 100%;
+    height: 100%;
+    min-height: 140px;
+    object-fit: cover;
+    object-position: bottom right;
+}
+
+.driver-card-placeholder {
+    width: 100%;
+    min-height: 140px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 1100px) {
+    .standings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-grid,
+    .driver-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .home-intro {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .main-wrapper {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .team-page,
+    .driver-page {
+        margin: -1rem;
+        padding: 1rem;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .app-layout {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 700px) {
+    .team-grid,
+    .driver-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .f1-standings-row {
+        grid-template-columns: 42px minmax(0, 1fr) 70px;
+        gap: 0.7rem;
+        padding: 0.9rem 1rem;
+    }
+
+    .standing-title {
+        font-size: 0.92rem;
+    }
+
+    .standing-position {
+        font-size: 1.2rem;
+    }
+
+    .standing-points strong {
+        font-size: 1.15rem;
+    }
+
+    .standings-card-header {
+        padding: 1rem;
+    }
 }

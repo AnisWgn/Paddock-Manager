@@ -3,9 +3,11 @@
 {% block title %}New Game{% endblock %}
 
 {% block body %}
-    <h1>Create new Game</h1>
+    <h1>Nouveau Grand Prix</h1>
 
     {{ include('game/_form.html.twig') }}
 
-    <a href="{{ path('app_game_index') }}">back to list</a>
+    <div class="page-actions">
+        <a href="{{ path('app_game_index') }}" class="btn btn-outline">← Retour</a>
+    </div>
 {% endblock %}

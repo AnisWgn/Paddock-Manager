@@ -22,11 +22,11 @@ class DriverRatingType extends AbstractType
             ->add('awareness')
             ->add('driver', EntityType::class, [
                 'class' => Driver::class,
-                'choice_label' => 'id',
+                'choice_label' => 'firstName',
             ])
             ->add('game', EntityType::class, [
                 'class' => Game::class,
-                'choice_label' => 'id',
+                'choice_label' => 'title',
             ])
         ;
     }

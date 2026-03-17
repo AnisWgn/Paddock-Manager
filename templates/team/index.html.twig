@@ -1,39 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Team index{% endblock %}
+{% block title %}Écuries{% endblock %}
 
 {% block body %}
-    <h1>Team index</h1>
+    <div class="team-page">
+        <div class="page-header">
+            <h1>Écuries</h1>
+        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Country</th>
-                <th>Logo</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for team in teams %}
-            <tr>
-                <td>{{ team.id }}</td>
-                <td>{{ team.name }}</td>
-                <td>{{ team.country }}</td>
-                <td>{{ team.logo }}</td>
-                <td>
-                    <a href="{{ path('app_team_show', {'id': team.id}) }}">show</a>
-                    <a href="{{ path('app_team_edit', {'id': team.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="team-grid">
+            {% for team in teams %}
+                <a href="{{ path('app_team_show', {'id': team.id}) }}" class="team-card"{% if team.backgroundColor %} style="--team-color: {{ team.backgroundColor }}"{% endif %}>
+                    <div class="team-card-header">
+                        {% if team.logo %}
+                            <img src="{{ team.logo }}" alt="{{ team.name }}" class="team-card-logo">
+                        {% endif %}
+                        <span class="team-card-name">{{ team.name }}</span>
+                    </div>
+                    <div class="team-card-image">
+                        {% if team.carImage %}
+                            <img src="{{ team.carImage }}" alt="{{ team.name }}">
+                        {% else %}
+                            <div class="team-card-placeholder"></div>
+                        {% endif %}
+                    </div>
+                </a>
+            {% else %}
+                <p class="standings-empty">Aucune écurie pour le moment.</p>
+            {% endfor %}
+        </div>
 
-    <a href="{{ path('app_team_new') }}">Create new</a>
+        <div class="page-actions">
+            <a href="{{ path('app_team_new') }}" class="btn btn-f1">+ Nouvelle écurie</a>
+        </div>
+    </div>
 {% endblock %}

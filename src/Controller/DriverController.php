@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/driver')]
 final class DriverController extends AbstractController
 {
-    #[Route(name: 'app_driver_index', methods: ['GET'])]
+    #[Route(name: 'app_driver_index', methods: ['GET'], )]
     public function index(DriverRepository $driverRepository): Response
     {
         return $this->render('driver/index.html.twig', [
@@ -42,7 +42,7 @@ final class DriverController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_driver_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_driver_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(Driver $driver): Response
     {
         return $this->render('driver/show.html.twig', [

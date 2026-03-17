@@ -3,7 +3,7 @@
 {% block title %}DriverRating{% endblock %}
 
 {% block body %}
-    <h1>DriverRating</h1>
+    <h1>Note{% if driver_rating.driver %} - {{ driver_rating.driver.firstName }} {{ driver_rating.driver.lastName }}{% endif %}</h1>
 
     <table class="table">
         <tbody>
@@ -34,9 +34,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_driver_rating_index') }}">back to list</a>
-
-    <a href="{{ path('app_driver_rating_edit', {'id': driver_rating.id}) }}">edit</a>
-
-    {{ include('driver_rating/_delete_form.html.twig') }}
+    <div class="page-actions">
+        <a href="{{ path('app_driver_rating_index') }}" class="btn btn-outline">← Retour</a>
+        <a href="{{ path('app_driver_rating_edit', {'id': driver_rating.id}) }}" class="btn btn-f1">Modifier</a>
+        {{ include('driver_rating/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

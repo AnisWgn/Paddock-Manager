@@ -3,7 +3,7 @@
 {% block title %}Game{% endblock %}
 
 {% block body %}
-    <h1>Game</h1>
+    <h1>{{ game.title }}</h1>
 
     <table class="table">
         <tbody>
@@ -26,9 +26,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_game_index') }}">back to list</a>
-
-    <a href="{{ path('app_game_edit', {'id': game.id}) }}">edit</a>
-
-    {{ include('game/_delete_form.html.twig') }}
+    <div class="page-actions">
+        <a href="{{ path('app_game_index') }}" class="btn btn-outline">← Retour</a>
+        <a href="{{ path('app_game_edit', {'id': game.id}) }}" class="btn btn-f1">Modifier</a>
+        {{ include('game/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

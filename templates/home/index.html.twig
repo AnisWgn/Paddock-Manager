@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paddock Manager - Accueil{% endblock %}
+
+{% block body %}
+    <section class="home-hero-media">
+        <div class="home-hero-card">
+            <img
+                src="https://media.formula1.com/image/upload/t_16by9Centre/c_lfill,w_3392/q_auto/v1740000001/fom-website/2026%20regulations/2026_Explainer_FIA_RHS_1920x1080.webp"
+                alt="Visuel F1 2026"
+                class="home-hero-image"
+            >
+            <div class="home-hero-overlay">
+                <div class="home-hero-overlay-content">
+                    <h1><span class="text-f1-red">Paddock Manager</span></h1>
+                    <p>Gestion des pilotes, des écuries et des Grands Prix.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-intro">
+        <div>
+            <span class="section-title">Classements</span>
+            <p class="home-intro-text">
+                Retrouvez un affichage inspiré du site officiel de la F1 avec un classement pilotes
+                et un classement écuries basés sur les notes enregistrées dans l'application.
+            </p>
+        </div>
+        <div class="home-intro-stats">
+            <div class="mini-stat">
+                <strong>{{ drivers|length }}</strong>
+                <span>Pilotes</span>
+            </div>
+            <div class="mini-stat">
+                <strong>{{ teams|length }}</strong>
+                <span>Écuries</span>
+            </div>
+            <div class="mini-stat">
+                <strong>{{ games|length }}</strong>
+                <span>GP</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="standings-grid">
+        <article class="standings-card">
+            <div class="standings-card-header">
+                <div>
+                    <span class="standings-kicker">FIA Formula 1</span>
+                    <h2>Classement pilotes</h2>
+                </div>
+                <a href="{{ path('app_driver_index') }}" class="btn btn-outline">Voir tous les pilotes</a>
+            </div>
+
+            <div class="f1-standings-table">
+                {% for standing in driver_standings %}
+                    <a href="{{ path('app_driver_show', {'id': standing.driver.id}) }}" class="f1-standings-row">
+                        <div class="standing-position">{{ standing.position }}</div>
+                        <div class="standing-main">
+                            <div class="standing-title">{{ standing.name }}</div>
+                            <div class="standing-meta">
+                                <span>{{ standing.team }}</span>
+                                <span>{{ standing.code }}</span>
+                                <span>{{ standing.country }}</span>
+                            </div>
+                        </div>
+                        <div class="standing-points">
+                            <strong>{{ standing.points }}</strong>
+                            <span>PTS</span>
+                        </div>
+                    </a>
+                {% else %}
+                    <div class="standings-empty">Aucun pilote disponible pour le moment.</div>
+                {% endfor %}
+            </div>
+        </article>
+
+        <article class="standings-card">
+            <div class="standings-card-header">
+                <div>
+                    <span class="standings-kicker">FIA Formula 1</span>
+                    <h2>Classement écuries</h2>
+                </div>
+                <a href="{{ path('app_team_index') }}" class="btn btn-outline">Voir toutes les écuries</a>
+            </div>
+
+            <div class="f1-standings-table">
+                {% for standing in team_standings %}
+                    <a href="{{ path('app_team_show', {'id': standing.team.id}) }}" class="f1-standings-row">
+                        <div class="standing-position">{{ standing.position }}</div>
+                        <div class="standing-main">
+                            <div class="standing-title">{{ standing.name }}</div>
+                            <div class="standing-meta">
+                                <span>{{ standing.country }}</span>
+                                <span>{{ standing.driversCount }} pilote(s)</span>
+                            </div>
+                        </div>
+                        <div class="standing-points">
+                            <strong>{{ standing.points }}</strong>
+                            <span>PTS</span>
+                        </div>
+                    </a>
+                {% else %}
+                    <div class="standings-empty">Aucune écurie disponible pour le moment.</div>
+                {% endfor %}
+            </div>
+        </article>
+    </section>
+{% endblock %}
