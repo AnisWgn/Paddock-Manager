@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Driver index{% endblock %}
+
+{% block body %}
+    <h1>Driver index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Nationality</th>
+                <th>BirthDate</th>
+                <th>Number</th>
+                <th>Code</th>
+                <th>Photo</th>
+                <th>IsAlive</th>
+                <th>IsRetired</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for driver in drivers %}
+            <tr>
+                <td>{{ driver.id }}</td>
+                <td>{{ driver.firstName }}</td>
+                <td>{{ driver.lastName }}</td>
+                <td>{{ driver.nationality }}</td>
+                <td>{{ driver.birthDate ? driver.birthDate|date('Y-m-d') : '' }}</td>
+                <td>{{ driver.number }}</td>
+                <td>{{ driver.code }}</td>
+                <td>{{ driver.photo }}</td>
+                <td>{{ driver.isAlive ? 'Yes' : 'No' }}</td>
+                <td>{{ driver.isRetired ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_driver_show', {'id': driver.id}) }}">show</a>
+                    <a href="{{ path('app_driver_edit', {'id': driver.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_driver_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DriverRating index{% endblock %}
+
+{% block body %}
+    <h1>DriverRating index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Overall</th>
+                <th>Pace</th>
+                <th>Experience</th>
+                <th>Racecraft</th>
+                <th>Awareness</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for driver_rating in driver_ratings %}
+            <tr>
+                <td>{{ driver_rating.id }}</td>
+                <td>{{ driver_rating.overall }}</td>
+                <td>{{ driver_rating.pace }}</td>
+                <td>{{ driver_rating.experience }}</td>
+                <td>{{ driver_rating.racecraft }}</td>
+                <td>{{ driver_rating.awareness }}</td>
+                <td>
+                    <a href="{{ path('app_driver_rating_show', {'id': driver_rating.id}) }}">show</a>
+                    <a href="{{ path('app_driver_rating_edit', {'id': driver_rating.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_driver_rating_new') }}">Create new</a>
+{% endblock %}

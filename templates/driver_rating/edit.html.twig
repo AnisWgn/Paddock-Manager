@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit DriverRating{% endblock %}
+
+{% block body %}
+    <h1>Edit DriverRating</h1>
+
+    {{ include('driver_rating/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_driver_rating_index') }}">back to list</a>
+
+    {{ include('driver_rating/_delete_form.html.twig') }}
+{% endblock %}
