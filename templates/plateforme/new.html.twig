@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle plateforme{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>Nouvelle plateforme</h1>
+    </div>
+
+    {{ include('plateforme/_form.html.twig') }}
+
+    <div class="page-actions">
+        <a href="{{ path('app_plateforme_index') }}" class="btn btn-outline">← Retour</a>
+    </div>
+{% endblock %}

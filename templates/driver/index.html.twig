@@ -4,10 +4,27 @@
 
 {% block body %}
     {% set flagCodes = {
-        'British': 'gb', 'French': 'fr', 'France': 'fr', 'Dutch': 'nl', 'German': 'de', 'Spain': 'es', 'Spanish': 'es',
-        'Italian': 'it', 'Italy': 'it', 'Australian': 'au', 'Canadian': 'ca', 'American': 'us', 'Brazilian': 'br',
-        'Monegasque': 'mc', 'Monaco': 'mc', 'Mexican': 'mx', 'Thai': 'th', 'Japanese': 'jp', 'China': 'cn', 'Chinese': 'cn',
-        'Danish': 'dk', 'Finnish': 'fi', 'New Zealander': 'nz', 'Austrian': 'at', 'Belgian': 'be', 'Swiss': 'ch'
+        'British': 'gb', 'Britannique': 'gb', 'UK': 'gb', 'United Kingdom': 'gb',
+        'French': 'fr', 'France': 'fr', 'Français': 'fr',
+        'Dutch': 'nl', 'Netherlands': 'nl', 'Néerlandais': 'nl',
+        'German': 'de', 'Germany': 'de', 'Allemand': 'de',
+        'Spain': 'es', 'Spanish': 'es', 'Espagnol': 'es',
+        'Italian': 'it', 'Italy': 'it', 'Italien': 'it',
+        'Australian': 'au', 'Australien': 'au',
+        'Canadian': 'ca', 'Canadien': 'ca',
+        'American': 'us', 'Américain': 'us', 'USA': 'us',
+        'Brazilian': 'br', 'Brésilien': 'br', 'Brazil': 'br',
+        'Monegasque': 'mc', 'Monaco': 'mc',
+        'Mexican': 'mx', 'Mexicain': 'mx', 'Mexico': 'mx',
+        'Thai': 'th', 'Thailand': 'th',
+        'Japanese': 'jp', 'Japonais': 'jp', 'Japan': 'jp',
+        'China': 'cn', 'Chinese': 'cn', 'Chinois': 'cn',
+        'Danish': 'dk', 'Danois': 'dk', 'Denmark': 'dk',
+        'Finnish': 'fi', 'Finlandais': 'fi', 'Finland': 'fi',
+        'New Zealander': 'nz', 'Néo-Zélandais': 'nz', 'New Zealand': 'nz',
+        'Austrian': 'at', 'Autrichien': 'at', 'Austria': 'at',
+        'Belgian': 'be', 'Belge': 'be', 'Belgium': 'be',
+        'Swiss': 'ch', 'Suisse': 'ch', 'Switzerland': 'ch'
     } %}
     <div class="driver-page">
         <div class="page-header">
@@ -16,32 +33,44 @@
 
         <div class="driver-grid">
             {% for driver in drivers %}
-                <a href="{{ path('app_driver_show', {'id': driver.id}) }}" class="driver-card"{% if driver.team and driver.team.backgroundColor %} style="--team-color: {{ driver.team.backgroundColor }}"{% endif %}>
-                    <div class="driver-card-content">
-                        <div class="driver-card-left">
-                            <span class="driver-card-name">{{ driver.firstName }} {{ driver.lastName }}</span>
-                            <span class="driver-card-team">{{ driver.team ? driver.team.name : 'Sans écurie' }}</span>
-                            <span class="driver-card-number">{{ driver.number }}</span>
-                            {% if driver.nationality and driver.nationality in flagCodes %}
-                                <img src="https://flagcdn.com/w40/{{ flagCodes[driver.nationality] }}.png" alt="{{ driver.nationality }}" class="driver-card-flag" width="24" height="18">
-                            {% endif %}
+                <div class="driver-card-wrapper">
+                    <a href="{{ path('app_driver_show', {'id': driver.id}) }}" class="driver-card"{% if driver.team and driver.team.backgroundColor %} style="--team-color: {{ driver.team.backgroundColor }}"{% endif %}>
+                        <div class="driver-card-content">
+                            <div class="driver-card-left">
+                                <span class="driver-card-firstname">{{ driver.firstName }}</span>
+                                <span class="driver-card-lastname">{{ driver.lastName }}</span>
+                                <span class="driver-card-number">{{ driver.number }}</span>
+                            <div class="driver-card-flag-wrap">
+                                {% if driver.nationality %}
+                                    <span class="driver-card-nationality">{{ driver.nationality }}</span>
+                                {% endif %}
+                            </div>
+                            </div>
+                            <div class="driver-card-photo-wrap">
+                                {% if driver.photo %}
+                                    <img src="{{ driver.photo }}" alt="{{ driver.firstName }} {{ driver.lastName }}" class="driver-card-photo">
+                                {% else %}
+                                    <div class="driver-card-placeholder"></div>
+                                {% endif %}
+                            </div>
                         </div>
-                        <div class="driver-card-photo-wrap">
-                            {% if driver.photo %}
-                                <img src="{{ driver.photo }}" alt="{{ driver.firstName }} {{ driver.lastName }}" class="driver-card-photo">
-                            {% else %}
-                                <div class="driver-card-placeholder"></div>
-                            {% endif %}
+                    </a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="driver-card-admin-actions" onclick="event.stopPropagation();">
+                            <a href="{{ path('app_driver_edit', {'id': driver.id}) }}" class="btn btn-sm btn-outline">Modifier</a>
+                            {{ include('driver/_delete_form.html.twig') }}
                         </div>
-                    </div>
-                </a>
+                    {% endif %}
+                </div>
             {% else %}
                 <p class="standings-empty">Aucun pilote pour le moment.</p>
             {% endfor %}
         </div>
 
-        <div class="page-actions">
-            <a href="{{ path('app_driver_new') }}" class="btn btn-f1">+ Nouveau pilote</a>
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="page-actions">
+                <a href="{{ path('app_driver_new') }}" class="btn btn-f1">+ Nouveau pilote</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

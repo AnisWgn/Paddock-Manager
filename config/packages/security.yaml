@@ -5,7 +5,6 @@ security:
 
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: App\Entity\User
@@ -13,36 +12,61 @@ security:
 
     firewalls:
         dev:
-            # Ensure dev tools and static assets are always allowed
             pattern: ^/(_profiler|_wdt|assets|build)/
             security: false
         main:
             lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\AppAuthenticator
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: false
+                default_target_path: app_home
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
-
+                target: app_login
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
                 path: /
-                # by default, the feature is enabled by checking a checkbox in the
-                # login form, uncomment the following line to always enable it.
-                #always_remember_me: true
 
-            # Activate different ways to authenticate:
-            # https://symfony.com/doc/current/security.html#the-firewall
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Note: Only the *first* matching rule is applied
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/team/new, roles: ROLE_ADMIN }
+        - { path: ^/team/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/team/\d+/delete, roles: ROLE_ADMIN }
+
+        - { path: ^/driver/new, roles: ROLE_ADMIN }
+        - { path: ^/driver/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/driver/\d+/delete, roles: ROLE_ADMIN }
+
+        - { path: ^/driver-rating, roles: ROLE_ADMIN }
+        - { path: ^/driver-rating/new, roles: ROLE_ADMIN }
+        - { path: ^/driver-rating/\d+, roles: ROLE_ADMIN }
+        - { path: ^/driver-rating/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/driver-rating/\d+/delete, roles: ROLE_ADMIN }
+        - { path: ^/driver-rating/\d+/show, roles: ROLE_ADMIN }
+
+        - { path: ^/game/new, roles: ROLE_ADMIN }
+        - { path: ^/game/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/game/\d+/delete, roles: ROLE_ADMIN }
+
+        - { path: ^/plateforme, roles: ROLE_ADMIN }
+        - { path: ^/plateforme/new, roles: ROLE_ADMIN }
+        - { path: ^/plateforme/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/plateforme/\d+/delete, roles: ROLE_ADMIN }
+        - { path: ^/plateforme/\d+/show, roles: ROLE_ADMIN }
+
+        - { path: ^/user$, roles: ROLE_ADMIN }
+        - { path: ^/user/new, roles: ROLE_ADMIN }
+        - { path: ^/user/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/user/\d+/delete, roles: ROLE_ADMIN }
+
+
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/user/\d+, roles: ROLE_USER }
+        - { path: ^/user/\d+/show, roles: ROLE_USER }
+
 
 when@test:
     security:

@@ -40,6 +40,36 @@ class Team
     #[ORM\Column(length: 7, nullable: true)]
     private ?string $backgroundColor = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $fullTeamName = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Base = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $TeamChief = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $TechnicalChief = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Chassis = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $PowerUnit = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $ReserveDriver = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $FirstTeamEntry = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image_biography = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $footerImage = null;
+
     public function __construct()
     {
         $this->drivers = new ArrayCollection();
@@ -148,6 +178,126 @@ class Team
     public function setBackgroundColor(?string $backgroundColor): static
     {
         $this->backgroundColor = $backgroundColor;
+
+        return $this;
+    }
+
+    public function getFullTeamName(): ?string
+    {
+        return $this->fullTeamName;
+    }
+
+    public function setFullTeamName(string $fullTeamName): static
+    {
+        $this->fullTeamName = $fullTeamName;
+
+        return $this;
+    }
+
+    public function getBase(): ?string
+    {
+        return $this->Base;
+    }
+
+    public function setBase(string $Base): static
+    {
+        $this->Base = $Base;
+
+        return $this;
+    }
+
+    public function getTeamChief(): ?string
+    {
+        return $this->TeamChief;
+    }
+
+    public function setTeamChief(string $TeamChief): static
+    {
+        $this->TeamChief = $TeamChief;
+
+        return $this;
+    }
+
+    public function getTechnicalChief(): ?string
+    {
+        return $this->TechnicalChief;
+    }
+
+    public function setTechnicalChief(string $TechnicalChief): static
+    {
+        $this->TechnicalChief = $TechnicalChief;
+
+        return $this;
+    }
+
+    public function getChassis(): ?string
+    {
+        return $this->Chassis;
+    }
+
+    public function setChassis(string $Chassis): static
+    {
+        $this->Chassis = $Chassis;
+
+        return $this;
+    }
+
+    public function getPowerUnit(): ?string
+    {
+        return $this->PowerUnit;
+    }
+
+    public function setPowerUnit(string $PowerUnit): static
+    {
+        $this->PowerUnit = $PowerUnit;
+
+        return $this;
+    }
+
+    public function getReserveDriver(): ?string
+    {
+        return $this->ReserveDriver;
+    }
+
+    public function setReserveDriver(string $ReserveDriver): static
+    {
+        $this->ReserveDriver = $ReserveDriver;
+
+        return $this;
+    }
+
+    public function getFirstTeamEntry(): ?string
+    {
+        return $this->FirstTeamEntry;
+    }
+
+    public function setFirstTeamEntry(string $FirstTeamEntry): static
+    {
+        $this->FirstTeamEntry = $FirstTeamEntry;
+
+        return $this;
+    }
+
+    public function getImageBiography(): ?string
+    {
+        return $this->image_biography;
+    }
+
+    public function setImageBiography(string $image_biography): static
+    {
+        $this->image_biography = $image_biography;
+
+        return $this;
+    }
+
+    public function getFooterImage(): ?string
+    {
+        return $this->footerImage;
+    }
+
+    public function setFooterImage(string $footerImage): static
+    {
+        $this->footerImage = $footerImage;
 
         return $this;
     }

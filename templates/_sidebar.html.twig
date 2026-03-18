@@ -20,15 +20,39 @@
                 </a>
             </li>
             <li>
+                <a href="{{ path('app_game_index') }}" class="nav-link {{ (app.request.attributes.get('_route') ?? '') starts with 'app_game' ? 'active' : '' }}">
+                    <span class="nav-icon">&#9888;</span> Jeux
+                </a>
+            </li>
+            <li>
+            {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('app_driver_rating_index') }}" class="nav-link {{ (app.request.attributes.get('_route') ?? '') starts with 'app_driver_rating' ? 'active' : '' }}">
                     <span class="nav-icon">&#9733;</span> Notes
                 </a>
             </li>
             <li>
-                <a href="{{ path('app_game_index') }}" class="nav-link {{ (app.request.attributes.get('_route') ?? '') starts with 'app_game' ? 'active' : '' }}">
-                    <span class="nav-icon">&#9888;</span> Jeux
+                <a href="{{ path('app_plateforme_index') }}" class="nav-link {{ (app.request.attributes.get('_route') ?? '') starts with 'app_plateforme' ? 'active' : '' }}">
+                    <span class="nav-icon">&#9888;</span> Plateformes
                 </a>
             </li>
+            <li>
+                <a href="{{ path('app_user_index') }}" class="nav-link {{ (app.request.attributes.get('_route') ?? '') starts with 'app_user' ? 'active' : '' }}">
+                    <span class="nav-icon">&#9888;</span> Utilisateurs
+                </a>
+            </li>
+            {% endif %}
         </ul>
     </nav>
+
+    {% if app.user %}
+    <div class="sidebar-footer">
+        <a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="nav-link">
+            <span class="sidebar-user">{{ app.user.userIdentifier }}</span>
+        </a>
+        <form method="post" action="{{ path('app_logout') }}" class="sidebar-logout">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+            <button type="submit" class="nav-link sidebar-logout-btn">Déconnexion</button>
+        </form>
+    </div>
+    {% endif %}
 </aside>

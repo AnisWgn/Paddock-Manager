@@ -24,7 +24,19 @@
                     <td>{{ game.id }}</td>
                     <td><a href="{{ path('app_game_show', {'id': game.id}) }}" class="table-link">{{ game.title }}</a></td>
                     <td>{{ game.year }}</td>
-                    <td>{{ game.platform }}</td>
+                    <td>
+                        {% if game.platforms|length > 0 %}
+                            {% for plateform in game.platforms %}
+                                {% if loop.index < 4%}
+                                    {{ plateform.name }}{% if loop.index < 3 %}, {% endif %}
+                                {% else %}
+                                    {% if loop.last %}...{% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            Aucune plateforme
+                        {% endif %}
+                    </td>
                     <td class="table-actions">
                         <a href="{{ path('app_game_show', {'id': game.id}) }}" class="btn btn-outline btn-sm">Voir</a>
                         <a href="{{ path('app_game_edit', {'id': game.id}) }}" class="btn btn-f1 btn-sm">Modifier</a>

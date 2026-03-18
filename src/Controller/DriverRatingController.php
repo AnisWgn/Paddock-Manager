@@ -68,7 +68,7 @@ final class DriverRatingController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_driver_rating_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_driver_rating_delete', methods: ['POST'])]
     public function delete(Request $request, DriverRating $driverRating, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$driverRating->getId(), $request->getPayload()->getString('_token'))) {

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ plateforme.name }}{% endblock %}
+
+{% block body %}
+    <div class="plateforme-show-top-actions">
+        <a href="{{ path('app_plateforme_index') }}" class="btn btn-outline">← Retour</a>
+    </div>
+
+    <div class="plateforme-show-card">
+        <h1 class="plateforme-show-name">{{ plateforme.name }}</h1>
+        <div class="plateforme-show-details">
+            <div class="plateforme-show-detail">
+                <span class="plateforme-show-label">Fabricant</span>
+                <strong>{{ plateforme.manufacturer }}</strong>
+            </div>
+            <div class="plateforme-show-detail">
+                <span class="plateforme-show-label">Couleur</span>
+                <div class="plateforme-show-color">
+                    <span class="plateforme-color-badge" style="background-color: {{ plateforme.color }};" title="{{ plateforme.color }}"></span>
+                    <strong>{{ plateforme.color }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-actions">
+        <a href="{{ path('app_plateforme_index') }}" class="btn btn-outline">← Retour</a>
+        <a href="{{ path('app_plateforme_edit', {'id': plateforme.id}) }}" class="btn btn-f1">Modifier</a>
+        {{ include('plateforme/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

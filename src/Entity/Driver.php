@@ -64,6 +64,9 @@ class Driver
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $quotesFrom = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $footerImage = null;
+
     public function __construct()
     {
         $this->driverRatings = new ArrayCollection();
@@ -268,6 +271,18 @@ class Driver
     public function setQuotesFrom(?string $quotesFrom): static
     {
         $this->quotesFrom = $quotesFrom;
+
+        return $this;
+    }
+
+    public function getFooterImage(): ?string
+    {
+        return $this->footerImage;
+    }
+
+    public function setFooterImage(string $footerImage): static
+    {
+        $this->footerImage = $footerImage;
 
         return $this;
     }

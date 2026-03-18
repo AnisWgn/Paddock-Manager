@@ -34,9 +34,16 @@ class Game
     #[ORM\OneToMany(targetEntity: DriverRating::class, mappedBy: 'game')]
     private Collection $driverRatings;
 
+    /**
+     * @var Collection<int, Plateforme>
+     */
+    #[ORM\ManyToMany(targetEntity: Plateforme::class, inversedBy: 'games')]
+    private Collection $platforms;
+
     public function __construct()
     {
         $this->driverRatings = new ArrayCollection();
+        $this->platforms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,6 +125,30 @@ class Game
                 $driverRating->setGame(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Plateforme>
+     */
+    public function getPlatforms(): Collection
+    {
+        return $this->platforms;
+    }
+
+    public function addPlatform(Plateforme $platform): static
+    {
+        if (!$this->platforms->contains($platform)) {
+            $this->platforms->add($platform);
+        }
+
+        return $this;
+    }
+
+    public function removePlatform(Plateforme $platform): static
+    {
+        $this->platforms->removeElement($platform);
 
         return $this;
     }

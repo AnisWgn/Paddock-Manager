@@ -43,6 +43,10 @@ class DriverType extends AbstractType
                 'label' => 'Source de la citation',
                 'required' => false,
             ])
+            ->add('footerImage', TextType::class, [
+                'label' => 'Image footer (URL)',
+                'required' => false,
+            ])
             ->add('isAlive', CheckboxType::class, ['label' => 'En vie', 'required' => false])
             ->add('isRetired', CheckboxType::class, ['label' => 'Retraité', 'required' => false])
             ->add('team', EntityType::class, [

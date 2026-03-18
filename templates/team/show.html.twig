@@ -3,50 +3,178 @@
 {% block title %}{{ team.name }}{% endblock %}
 
 {% block body %}
-    <div class="page-header">
-        <h1>{{ team.name }}</h1>
+    {% set flagCodes = {
+        'British': 'gb', 'Britannique': 'gb', 'UK': 'gb', 'United Kingdom': 'gb',
+        'French': 'fr', 'France': 'fr', 'Français': 'fr',
+        'Dutch': 'nl', 'Netherlands': 'nl', 'Néerlandais': 'nl',
+        'German': 'de', 'Germany': 'de', 'Allemand': 'de',
+        'Spain': 'es', 'Spanish': 'es', 'Espagnol': 'es',
+        'Italian': 'it', 'Italy': 'it', 'Italien': 'it',
+        'Australian': 'au', 'Australien': 'au',
+        'Canadian': 'ca', 'Canadien': 'ca',
+        'American': 'us', 'Américain': 'us', 'USA': 'us',
+        'Brazilian': 'br', 'Brésilien': 'br', 'Brazil': 'br',
+        'Monegasque': 'mc', 'Monaco': 'mc',
+        'Mexican': 'mx', 'Mexicain': 'mx', 'Mexico': 'mx',
+        'Thai': 'th', 'Thailand': 'th',
+        'Japanese': 'jp', 'Japonais': 'jp', 'Japan': 'jp',
+        'China': 'cn', 'Chinese': 'cn', 'Chinois': 'cn',
+        'Danish': 'dk', 'Danois': 'dk', 'Denmark': 'dk',
+        'Finnish': 'fi', 'Finlandais': 'fi', 'Finland': 'fi',
+        'New Zealander': 'nz', 'Néo-Zélandais': 'nz', 'New Zealand': 'nz',
+        'Austrian': 'at', 'Autrichien': 'at', 'Austria': 'at',
+        'Belgian': 'be', 'Belge': 'be', 'Belgium': 'be',
+        'Swiss': 'ch', 'Suisse': 'ch', 'Switzerland': 'ch'
+    } %}
+    <div class="team-show-top-actions">
+        <a href="{{ path('app_team_index') }}" class="btn btn-outline">← Retour</a>
     </div>
 
-    <div class="team-show-card"{% if team.backgroundColor %} style="--team-color: {{ team.backgroundColor }}"{% endif %}>
-        {% if team.logo %}
-            <img src="{{ team.logo }}" alt="{{ team.name }}" class="team-show-logo">
-        {% endif %}
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Pays</th>
-                    <td>{{ team.country }}</td>
-                </tr>
-                <tr>
-                    <th>Logo</th>
-                    <td>{% if team.logo %}<a href="{{ team.logo }}" target="_blank" rel="noopener">Voir</a>{% else %}—{% endif %}</td>
-                </tr>
-                <tr>
-                    <th>Image voiture</th>
-                    <td>{% if team.carImage %}<a href="{{ team.carImage }}" target="_blank" rel="noopener">Voir</a>{% else %}—{% endif %}</td>
-                </tr>
-                <tr>
-                    <th>Couleur de fond</th>
-                    <td>{% if team.backgroundColor %}<span class="team-color-swatch" style="background-color: {{ team.backgroundColor }}"></span> {{ team.backgroundColor }}{% else %}—{% endif %}</td>
-                </tr>
-            </tbody>
-        </table>
-        {% if team.description %}
-            <div class="team-show-description">
-                <h3 class="section-title">Description</h3>
-                {{ team.description|nl2br }}
-            </div>
-        {% endif %}
+    <div class="team-show-hero"{% if team.backgroundColor %} style="--team-color: {{ team.backgroundColor }}"{% endif %}>
         {% if team.carImage %}
-            <div class="team-show-car">
-                <img src="{{ team.carImage }}" alt="{{ team.name }}">
+            <div class="team-show-car-wrap">
+                <img src="{{ team.carImage }}" alt="{{ team.name }}" class="team-show-car-img">
             </div>
         {% endif %}
+        {% if team.logo %}
+            <div class="team-show-hero-logo-wrap">
+                <img src="{{ team.logo }}" alt="{{ team.name }}" class="team-show-hero-logo">
+            </div>
+        {% endif %}
+        <div class="team-show-hero-content">
+            <div class="team-show-name-wrap">
+                <svg class="team-show-line team-show-line-left" viewBox="0 0 25400 300" preserveAspectRatio="none" aria-hidden="true">
+                    <g transform="scale(-1,-1) translate(-25400,-300)">
+                        <path fill="currentColor" d="M200 0h128l-200 200h-128Z"></path>
+                        <path fill="currentColor" d="M344 0h25000v91h-25091Z"></path>
+                        <path fill="currentColor" d="M144 200h25200v-97h-25103Z"></path>
+                    </g>
+                </svg>
+                <h1 class="team-show-name">{{ team.name|upper }}</h1>
+                <svg class="team-show-line team-show-line-right" viewBox="0 0 25400 300" preserveAspectRatio="none" aria-hidden="true">
+                    <g transform="scale(-1,-1) translate(-25400,-300)">
+                        <path fill="currentColor" d="M200 0h25000v91h-25091Z"></path>
+                        <path fill="currentColor" d="M0 200h25200v-97h-25103Z"></path>
+                    </g>
+                </svg>
+            </div>
+            {% if team.drivers|length > 0 %}
+                <p class="team-show-drivers-names">
+                    {% for driver in team.drivers %}
+                        {{ driver.firstName }} {{ driver.lastName }}{% if not loop.last %} | {% endif %}
+                    {% endfor %}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="team-show-drivers-section">
+        <h2 class="team-show-drivers-title">Pilotes</h2>
+        <div class="driver-grid team-show-drivers-grid">
+            {% for driver in team.drivers %}
+                <a href="{{ path('app_driver_show', {'id': driver.id}) }}" class="driver-card"{% if team.backgroundColor %} style="--team-color: {{ team.backgroundColor }}"{% endif %}>
+                    <div class="driver-card-content">
+                        <div class="driver-card-left">
+                            <span class="driver-card-firstname">{{ driver.firstName }}</span>
+                            <span class="driver-card-lastname">{{ driver.lastName }}</span>
+                            <span class="driver-card-number">{{ driver.number }}</span>
+                            <div class="driver-card-flag-wrap">
+                                {% if driver.nationality %}
+                                    <span class="driver-card-nationality">{{ driver.nationality }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="driver-card-photo-wrap">
+                            {% if driver.photo %}
+                                <img src="{{ driver.photo }}" alt="{{ driver.firstName }} {{ driver.lastName }}" class="driver-card-photo">
+                            {% else %}
+                                <div class="driver-card-placeholder"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+            {% else %}
+                <p class="standings-empty">Aucun pilote dans cette écurie.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="team-bio">
+        <svg class="team-bio-top-bar" viewBox="0 0 25400 300" preserveAspectRatio="none" aria-hidden="true">
+            <path fill="currentColor" d="M200 0h128l-200 200h-128Z"></path>
+            <path fill="currentColor" d="M344 0h25000v91h-25091Z"></path>
+            <path fill="currentColor" d="M144 200h25200v-97h-25103Z"></path>
+        </svg>
+        <h2 class="team-bio-title">PROFIL ÉCURIE</h2>
+
+        <div class="team-bio-stats">
+            <div class="team-bio-stats-row">
+                <div class="team-bio-stat">
+                    <span class="team-bio-label">NOM COMPLET DE L'ÉCURIE</span>
+                    <strong>{{ team.fullTeamName ?? '—' }}</strong>
+                </div>
+                <div class="team-bio-stat">
+                    <span class="team-bio-label">SIÈGE</span>
+                    <strong>{{ team.Base ?? '—' }}</strong>
+                </div>
+                <div class="team-bio-stat">
+                    <span class="team-bio-label">DIRECTEUR D'ÉCURIE</span>
+                    <strong>{{ team.TeamChief ?? '—' }}</strong>
+                </div>
+                <div class="team-bio-stat">
+                    <span class="team-bio-label">DIRECTEUR TECHNIQUE</span>
+                    <strong>{{ team.TechnicalChief ?? '—' }}</strong>
+                </div>
+            </div>
+            <div class="team-bio-stats-row">
+                <div class="team-bio-stat">
+                    <span class="team-bio-label">CHÂSSIS</span>
+                    <strong>{{ team.Chassis ?? '—' }}</strong>
+                </div>
+                <div class="team-bio-stat">
+                    <span class="team-bio-label">MOTEUR</span>
+                    <strong>{{ team.PowerUnit ?? '—' }}</strong>
+                </div>
+                <div class="team-bio-stat">
+                    <span class="team-bio-label">PILOTE DE RÉSERVE</span>
+                    <strong>{{ team.ReserveDriver ?? '—' }}</strong>
+                </div>
+                <div class="team-bio-stat">
+                    <span class="team-bio-label">PREMIÈRE PARTICIPATION</span>
+                    <strong>{{ team.FirstTeamEntry ?? '—' }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-bio-content">
+            <div class="team-bio-photo">
+                {% if team.imageBiography %}
+                    <img src="{{ team.imageBiography }}" alt="{{ team.name }}">
+                {% else %}
+                    <div class="team-bio-photo-placeholder"></div>
+                {% endif %}
+            </div>
+            <div class="team-bio-text">
+                {% if team.description %}
+                    {{ team.description|nl2br }}
+                {% else %}
+                    <p class="team-bio-empty">Aucune description disponible pour le moment.</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 
     <div class="page-actions">
         <a href="{{ path('app_team_index') }}" class="btn btn-outline">← Retour</a>
-        <a href="{{ path('app_team_edit', {'id': team.id}) }}" class="btn btn-f1">Modifier</a>
-        {{ include('team/_delete_form.html.twig') }}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_team_edit', {'id': team.id}) }}" class="btn btn-f1">Modifier</a>
+            {{ include('team/_delete_form.html.twig') }}
+        {% endif %}
     </div>
+
+    {% if team.footerImage %}
+    <div class="show-footer-image">
+        <img src="{{ team.footerImage }}" alt="{{ team.name }}">
+    </div>
+    {% endif %}
 {% endblock %}

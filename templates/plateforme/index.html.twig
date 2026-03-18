@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plateformes{% endblock %}
+
+{% block body %}
+    <div class="plateforme-page">
+        <div class="page-header">
+            <h1>Plateformes</h1>
+        </div>
+
+        <div class="table-card">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Fabricant</th>
+                        <th>Couleur</th>
+                        <th class="table-actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for plateforme in plateformes %}
+                    <tr>
+                        <td>{{ plateforme.id }}</td>
+                        <td>{{ plateforme.name }}</td>
+                        <td>{{ plateforme.manufacturer }}</td>
+                        <td>
+                            <span class="plateforme-color-badge" style="background-color: {{ plateforme.color }};" title="{{ plateforme.color }}"></span>
+                            {{ plateforme.color }}
+                        </td>
+                        <td class="table-actions">
+                            <a href="{{ path('app_plateforme_show', {'id': plateforme.id}) }}" class="btn btn-sm btn-outline">Voir</a>
+                            <a href="{{ path('app_plateforme_edit', {'id': plateforme.id}) }}" class="btn btn-sm btn-outline">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="table-empty">Aucune plateforme enregistrée.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="page-actions">
+            <a href="{{ path('app_plateforme_new') }}" class="btn btn-f1">+ Nouvelle plateforme</a>
+        </div>
+    </div>
+{% endblock %}

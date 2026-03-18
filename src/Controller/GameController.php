@@ -68,7 +68,7 @@ final class GameController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_game_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_game_delete', methods: ['POST'])]
     public function delete(Request $request, Game $game, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$game->getId(), $request->getPayload()->getString('_token'))) {

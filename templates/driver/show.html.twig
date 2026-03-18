@@ -110,4 +110,10 @@
         {% endif %}
     </div>
     {% endif %}
+
+    {% if driver.footerImage %}
+    <div class="show-footer-image">
+        <img src="{{ driver.footerImage }}" alt="{{ driver.firstName }} {{ driver.lastName }}">
+    </div>
+    {% endif %}
 {% endblock %}

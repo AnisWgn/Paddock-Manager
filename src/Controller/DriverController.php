@@ -68,7 +68,7 @@ final class DriverController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_driver_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_driver_delete', methods: ['POST'])]
     public function delete(Request $request, Driver $driver, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$driver->getId(), $request->getPayload()->getString('_token'))) {

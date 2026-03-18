@@ -117,6 +117,38 @@ a { color: inherit; text-decoration: none; }
     text-align: center;
 }
 
+.sidebar-footer {
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--f1-gray);
+    margin-top: auto;
+}
+
+.sidebar-user {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-logout {
+    margin: 0;
+}
+
+.sidebar-logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 0;
+    font-size: 0.8rem;
+    color: var(--f1-red);
+}
+
+.sidebar-logout-btn:hover {
+    color: var(--f1-white);
+}
+
 /* ===================== Home Hero ===================== */
 .hero {
     background: linear-gradient(135deg, var(--f1-dark) 0%, var(--f1-black) 60%, rgba(225,6,0,0.15) 100%);
@@ -536,6 +568,71 @@ a { color: inherit; text-decoration: none; }
     color: rgba(255,255,255,0.5);
 }
 
+/* ===================== Plateforme CRUD ===================== */
+.plateforme-page {
+    width: 100%;
+}
+
+.plateforme-show-top-actions {
+    margin-bottom: 0.75rem;
+}
+
+.plateforme-show-card {
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.plateforme-show-name {
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 1.5rem;
+    color: var(--f1-white);
+}
+
+.plateforme-show-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem 4rem;
+}
+
+.plateforme-show-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.plateforme-show-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.plateforme-show-detail strong {
+    font-size: 1.1rem;
+}
+
+.plateforme-show-color {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.plateforme-color-badge {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--f1-gray);
+    flex-shrink: 0;
+}
+
 /* ===================== Forms ===================== */
 .form-card {
     background: var(--f1-dark);
@@ -881,16 +978,23 @@ label {
     margin-bottom: 2rem;
 }
 
+.team-card-wrapper {
+    position: relative;
+}
+
+.team-card-admin-actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 5;
+}
+
 .team-card {
-    --team-color: var(--f1-dark);
-    --color: rgba(114, 114, 114, 0.3);
     display: flex;
     flex-direction: column;
-    background-color: var(--team-color);
-    background-image:
-        linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
-        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
-    background-size: 55px 55px;
+    background-color: var(--f1-dark);
     border: 1px solid var(--f1-gray);
     border-radius: 10px;
     overflow: hidden;
@@ -945,7 +1049,13 @@ label {
     border-radius: 6px;
 }
 
-.team-show-card {
+/* ===================== Team Show Hero ===================== */
+.team-show-top-actions {
+    margin: 0 auto 0.75rem;
+    max-width: calc(100% - 36rem);
+}
+
+.team-show-hero {
     --team-color: var(--f1-dark);
     --color: rgba(114, 114, 114, 0.3);
     background-color: var(--team-color);
@@ -953,10 +1063,231 @@ label {
         linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
         linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
     background-size: 55px 55px;
-    border: 1px solid var(--f1-gray);
     border-radius: 10px;
-    padding: 1.5rem;
+    border: 1px solid var(--f1-gray);
+    overflow: hidden;
+    margin: 0 auto 2rem;
+    max-width: calc(100% - 36rem);
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-show-car-wrap {
+    flex: 0 0 50%;
+    min-height: 260px;
+    width: 100%;
+    padding: 2rem 2.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-show-car-img {
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    min-height: 200px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.team-show-hero-logo-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 2rem 0;
+}
+
+.team-show-hero-logo {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+}
+
+.team-show-hero-content {
+    flex: 1;
+    padding: 2rem 2.5rem 3rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.team-show-name-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.team-show-line {
+    flex: 1;
+    max-width: 1000px;
+    height: 40px;
+    color: var(--f1-white);
+    opacity: 0.8;
+}
+
+
+.team-show-name {
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--f1-white);
+    margin: 0;
+}
+
+.team-show-drivers-names {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0;
+}
+
+.team-show-drivers-section {
+    margin: 0 auto 2rem;
+    max-width: calc(100% - 36rem);
+}
+
+.team-show-drivers-title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+}
+
+.team-show-drivers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 0;
+}
+
+.team-show-drivers-grid .driver-card {
+    min-height: 260px;
+    width: 750px;
+    margin-left: 26px; 
+}
+
+.team-show-drivers-grid .driver-card-content {
+    flex: 1;
+}
+
+.team-show-drivers-grid .driver-card-photo-wrap {
+    width: 55%;
+    max-width: none;
+    min-height: 180px;
+}
+
+.team-show-drivers-grid .driver-card-photo {
+    height: 260px;
+}
+
+.team-show-drivers-grid .driver-card-lastname {
+    font-size: 1.6rem;
+}
+
+.team-show-drivers-grid .driver-card-number {
+    font-size: 4rem;
+}
+
+/* ===================== Team Biography ===================== */
+.team-bio {
+    margin: 0.75rem auto 0;
+    max-width: calc(100% - 36rem);
+}
+
+.team-bio-top-bar {
+    width: 100%;
+    height: 35px;
+    margin-bottom: 1.5rem;
+    color: var(--f1-red);
+    transform: rotate(180deg);
+    transform-origin: center;
+}
+
+.team-bio-title {
+    font-size: 2.6rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.team-bio-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem 6rem;
     margin-bottom: 2rem;
+}
+
+.team-bio-stats-row {
+    display: contents;
+}
+
+.team-bio-stats-row .team-bio-stat {
+    min-width: 0;
+}
+
+.team-bio-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.team-bio-label {
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+}
+
+.team-bio-stat strong {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.team-bio-content {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.team-bio-photo {
+    flex-shrink: 0;
+    width: 600px;
+    padding-left: 10rem;
+    padding-top: 4rem;
+}
+
+.team-bio-photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.team-bio-photo-placeholder {
+    width: 300px;
+    height: 350px;
+    background: var(--f1-dark);
+    border-radius: 8px;
+}
+
+.team-bio-text {
+    flex: 1;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.1rem;
+    line-height: 1.75;
+}
+
+.team-bio-empty {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
 }
 
 .team-show-logo {
@@ -1013,6 +1344,19 @@ label {
     margin-bottom: 2rem;
 }
 
+.driver-card-wrapper {
+    position: relative;
+}
+
+.driver-card-admin-actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 5;
+}
+
 .driver-card {
     --team-color: var(--f1-dark);
     --color: rgba(114, 114, 114, 0.3);
@@ -1027,15 +1371,14 @@ label {
     border: 1px solid var(--f1-gray);
     border-radius: 10px;
     overflow: hidden;
-    transition: border-color 0.2s, transform 0.2s;
     text-decoration: none;
     color: var(--f1-white);
     min-height: 180px;
 }
 
-.driver-card:hover {
-    border-color: var(--f1-red);
-    transform: translateY(-3px);
+.driver-card:hover .driver-card-firstname,
+.driver-card:hover .driver-card-lastname {
+    text-decoration: underline;
 }
 
 .driver-card-content {
@@ -1047,15 +1390,14 @@ label {
 .driver-card-left {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 0.9rem 1rem 0.75rem;
     min-width: 0;
     flex: 1;
 }
 
-.driver-card-name {
-    font-size: 1.25rem;
-    font-weight: 700;
+.driver-card-firstname {
+    font-size: 1rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     line-height: 1.2;
@@ -1064,9 +1406,12 @@ label {
     text-overflow: ellipsis;
 }
 
-.driver-card-team {
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.75);
+.driver-card-lastname {
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
     margin-top: 0.15rem;
     white-space: nowrap;
     overflow: hidden;
@@ -1077,9 +1422,20 @@ label {
     font-size: 3.2rem;
     font-weight: 900;
     line-height: 1;
+    margin-top: 0.5rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.driver-card-flag-wrap {
     margin-top: auto;
     padding-top: 0.5rem;
-    font-variant-numeric: tabular-nums;
+}
+
+.driver-card-nationality {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 .driver-card-flag {
@@ -1087,7 +1443,7 @@ label {
     height: 28px;
     object-fit: cover;
     border-radius: 2px;
-    margin-top: 0.35rem;
+    display: block;
 }
 
 .driver-card-photo-wrap {
@@ -1213,7 +1569,7 @@ label {
     font-family: 'Orbitron', sans-serif;
     font-size: 12rem;
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.3);
     line-height: 1;
     font-variant-numeric: tabular-nums;
     z-index: 2;
@@ -1369,6 +1725,21 @@ label {
     fill: var(--f1-red);
 }
 
+.show-footer-image {
+    margin-top: 3rem;
+    width: 100%;
+    max-width: calc(100% - 36rem);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.show-footer-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
 .driver-quote-text {
     font-family: 'Orbitron', sans-serif;
     font-size: 2.5rem;
@@ -1418,6 +1789,10 @@ label {
         font-size: 1.35rem;
         font-weight: 900;
     }
+
+    .show-footer-image {
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 1100px) {
@@ -1463,6 +1838,68 @@ label {
     .team-grid,
     .driver-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team-show-hero,
+    .team-show-top-actions,
+    .team-show-drivers-section,
+    .team-bio {
+        max-width: 100%;
+    }
+
+    .plateforme-show-details {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .team-bio-content {
+        flex-direction: column;
+    }
+
+    .team-bio-photo {
+        width: 100%;
+        max-width: 360px;
+        padding-left: 0;
+    }
+
+    .team-bio-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 2rem;
+    }
+
+    .team-show-hero {
+        min-height: 400px;
+    }
+
+    .team-show-car-wrap {
+        min-height: 200px;
+    }
+
+    .team-show-car-img {
+        max-width: 100%;
+        min-height: 160px;
+    }
+
+    .team-show-hero-logo {
+        width: 72px;
+        height: 72px;
+    }
+
+    .team-show-name {
+        font-size: 2.25rem;
+        letter-spacing: 0.1em;
+    }
+
+    .team-show-drivers-names {
+        font-size: 1rem;
+    }
+
+    .team-show-drivers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-show-drivers-grid .driver-card {
+        min-height: 180px;
     }
 
     .driver-show-content {
