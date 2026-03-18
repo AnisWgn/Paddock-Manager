@@ -3,7 +3,9 @@
 {% block title %}Edit Game{% endblock %}
 
 {% block body %}
-    <h1>Modifier {{ game.title }}</h1>
+    <div class="page-header">
+        <h1>Modifier {{ game.title }}</h1>
+    </div>
 
     {{ include('game/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 

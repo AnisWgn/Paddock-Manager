@@ -3,7 +3,9 @@
 {% block title %}Edit DriverRating{% endblock %}
 
 {% block body %}
-    <h1>Modifier la note</h1>
+    <div class="page-header">
+        <h1>Modifier la note</h1>
+    </div>
 
     {{ include('driver_rating/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 

@@ -1,58 +1,113 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Driver{% endblock %}
+{% block title %}{{ driver.firstName }} {{ driver.lastName }}{% endblock %}
+
+{% block meta %}
+    <meta name="turbo-cache-control" content="no-cache">
+{% endblock %}
 
 {% block body %}
-    <h1>{{ driver.firstName }} {{ driver.lastName }}</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ driver.id }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
-                <td>{{ driver.firstName }}</td>
-            </tr>
-            <tr>
-                <th>LastName</th>
-                <td>{{ driver.lastName }}</td>
-            </tr>
-            <tr>
-                <th>Nationality</th>
-                <td>{{ driver.nationality }}</td>
-            </tr>
-            <tr>
-                <th>BirthDate</th>
-                <td>{{ driver.birthDate ? driver.birthDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td>{{ driver.number }}</td>
-            </tr>
-            <tr>
-                <th>Code</th>
-                <td>{{ driver.code }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ driver.photo }}</td>
-            </tr>
-            <tr>
-                <th>IsAlive</th>
-                <td>{{ driver.isAlive ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>IsRetired</th>
-                <td>{{ driver.isRetired ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="page-actions">
+    {% set flagCodes = {
+        'British': 'gb', 'French': 'fr', 'France': 'fr', 'Dutch': 'nl', 'Netherlands': 'nl', 'German': 'de',
+        'Spain': 'es', 'Spanish': 'es', 'Italian': 'it', 'Italy': 'it', 'Australian': 'au', 'Canadian': 'ca',
+        'American': 'us', 'Brazilian': 'br', 'Monegasque': 'mc', 'Monaco': 'mc', 'Mexican': 'mx', 'Thai': 'th',
+        'Japanese': 'jp', 'China': 'cn', 'Chinese': 'cn', 'Danish': 'dk', 'Finnish': 'fi', 'New Zealander': 'nz',
+        'Austrian': 'at', 'Belgian': 'be', 'Swiss': 'ch'
+    } %}
+    <div class="driver-show-top-actions">
         <a href="{{ path('app_driver_index') }}" class="btn btn-outline">← Retour</a>
-        <a href="{{ path('app_driver_edit', {'id': driver.id}) }}" class="btn btn-f1">Modifier</a>
-        {{ include('driver/_delete_form.html.twig') }}
     </div>
+
+    <div class="driver-show-banner"{% if driver.team and driver.team.backgroundColor %} style="--team-color: {{ driver.team.backgroundColor }}"{% endif %}>
+        <div class="driver-show-content">
+            <div class="driver-show-left">
+                <span class="driver-show-firstname">{{ driver.firstName }}</span>
+                <h1 class="driver-show-lastname">{{ driver.lastName }}</h1>
+                <div class="driver-show-meta">
+                    {% if driver.nationality and driver.nationality in flagCodes %}
+                        <img src="https://flagcdn.com/w40/{{ flagCodes[driver.nationality] }}.png" alt="" class="driver-show-flag" width="32" height="24">
+                    {% endif %}
+                    {% if driver.nationality %}<span>{{ driver.nationality }}</span>{% endif %}
+                    {% if driver.team %}<span class="driver-show-sep">|</span><span>{{ driver.team.name }}</span>{% endif %}
+                    <span class="driver-show-sep">|</span>
+                    <span class="driver-show-number">{{ driver.number }}</span>
+                </div>
+            </div>
+            <div class="driver-show-right">
+                {% if driver.photo %}
+                    <img src="{{ driver.photo }}" alt="{{ driver.firstName }} {{ driver.lastName }}" class="driver-show-photo">
+                {% else %}
+                    <div class="driver-show-photo-placeholder"></div>
+                {% endif %}
+            </div>
+        </div>
+        <span class="driver-show-bg-number" aria-hidden="true">{{ driver.number }}</span>
+    </div>
+
+    <div class="driver-bio">
+        <svg class="driver-bio-top-bar" viewBox="0 0 25400 300" preserveAspectRatio="none" aria-hidden="true" >
+            <path fill="currentColor" d="M200 0h128l-200 200h-128Z"></path>
+            <path fill="currentColor" d="M344 0h25000v91h-25091Z"></path>
+            <path fill="currentColor" d="M144 200h25200v-97h-25103Z"></path>
+        </svg>
+        <h2 class="driver-bio-title">Biographie</h2>
+
+        <div class="driver-bio-stats">
+            <div class="driver-bio-stat">
+                <span class="driver-bio-label">Date de naissance</span>
+                <strong>{{ driver.birthDate ? driver.birthDate|date('d/m/Y') : '—' }}</strong>
+            </div>
+            <div class="driver-bio-stat">
+                <span class="driver-bio-label">Nationalité</span>
+                <div class="driver-bio-nationality">
+                    {% if driver.nationality and driver.nationality in flagCodes %}
+                        <span class="driver-bio-flag-round">
+                            <img src="https://flagcdn.com/w80/{{ flagCodes[driver.nationality] }}.png" alt="">
+                        </span>
+                    {% endif %}
+                    <strong>{{ driver.nationality ?? '—' }}</strong>
+                </div>
+            </div>
+            <div class="driver-bio-stat">
+                <span class="driver-bio-label">Numéro</span>
+                <strong>{{ driver.number }}</strong>
+            </div>
+            <div class="driver-bio-stat">
+                <span class="driver-bio-label">Code</span>
+                <strong>{{ driver.code }}</strong>
+            </div>
+        </div>
+
+        <div class="driver-bio-content">
+            <div class="driver-bio-photo">
+                {% if driver.imageBiography %}
+                    <img src="{{ driver.imageBiography }}" alt="{{ driver.firstName }} {{ driver.lastName }}">
+                {% else %}
+                    <div class="driver-bio-photo-placeholder"></div>
+                {% endif %}
+            </div>
+            <div class="driver-bio-text">
+                {% if driver.description %}
+                    {{ driver.description|nl2br }}
+                {% else %}
+                    <p class="driver-bio-empty">Aucune biographie disponible pour le moment.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if driver.quotes %}
+    <div class="driver-quote-block">
+        <svg class="driver-quote-icon" viewBox="0 0 64 44" fill="none" role="presentation" aria-hidden="true">
+            <path d="M0 6.39337V11.4717H16.5209V22.6482C16.5209 28.1046 12.9206 32.5275 8.4793 32.5275H0V37.6059H8.4793C12.13 37.6059 15.6386 35.8665 18.1044 32.8392C20.3572 30.0709 21.5993 26.4523 21.5993 22.6482V6.39337H0Z"></path>
+            <path d="M0 0V5.07833H22.9147V22.6485C22.9147 26.7529 21.5695 30.6671 19.1243 33.6692C16.4086 37.0058 12.5287 38.9217 8.48159 38.9217H0.00229394V44H8.48159C14.0642 44 19.3786 41.4013 23.0637 36.8752C26.2423 32.9702 27.9931 27.9171 27.9931 22.6485V0H0Z"></path>
+            <path d="M29.3037 6.39337V11.4717H45.8246V22.6482C45.8246 28.1046 42.2243 32.5275 37.783 32.5275H29.3037V37.6059H37.783C41.4337 37.6059 44.9423 35.8665 47.4082 32.8392C49.6609 30.0709 50.903 26.4523 50.903 22.6482V6.39337H29.3037Z"></path>
+            <path d="M29.3057 0V5.07833H52.2204V22.6485C52.2204 26.7529 50.8752 30.6671 48.4299 33.6692C45.7143 37.0058 41.8344 38.9217 37.7873 38.9217H29.308V44H37.7873C43.3698 44 48.6843 41.4013 52.3694 36.8752C55.5479 32.9702 57.2988 27.9171 57.2988 22.6485V0H29.3057Z"></path>
+        </svg>
+        <p class="driver-quote-text">{{ driver.quotes|upper }}</p>
+        {% if driver.quotesFrom %}
+        <p class="driver-quote-from">{{ driver.quotesFrom }}</p>
+        {% endif %}
+    </div>
+    {% endif %}
 {% endblock %}

@@ -1,38 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}DriverRating{% endblock %}
+{% block title %}Note{% if driver_rating.driver %} - {{ driver_rating.driver.firstName }} {{ driver_rating.driver.lastName }}{% endif %}{% endblock %}
 
 {% block body %}
-    <h1>Note{% if driver_rating.driver %} - {{ driver_rating.driver.firstName }} {{ driver_rating.driver.lastName }}{% endif %}</h1>
+    <div class="page-header">
+        <h1>Note{% if driver_rating.driver %} — {{ driver_rating.driver.firstName }} {{ driver_rating.driver.lastName }}{% endif %}</h1>
+        {% if driver_rating.game %}
+            <p class="page-subtitle">{{ driver_rating.game.title }}</p>
+        {% endif %}
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ driver_rating.id }}</td>
-            </tr>
-            <tr>
-                <th>Overall</th>
-                <td>{{ driver_rating.overall }}</td>
-            </tr>
-            <tr>
-                <th>Pace</th>
-                <td>{{ driver_rating.pace }}</td>
-            </tr>
-            <tr>
-                <th>Experience</th>
-                <td>{{ driver_rating.experience }}</td>
-            </tr>
-            <tr>
-                <th>Racecraft</th>
-                <td>{{ driver_rating.racecraft }}</td>
-            </tr>
-            <tr>
-                <th>Awareness</th>
-                <td>{{ driver_rating.awareness }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="show-card">
+        <div class="rating-grid">
+            <div class="rating-item">
+                <span class="rating-label">Overall</span>
+                <span class="rating-value">{{ driver_rating.overall }}/100</span>
+            </div>
+            <div class="rating-item">
+                <span class="rating-label">Pace</span>
+                <span class="rating-value">{{ driver_rating.pace }}/100</span>
+            </div>
+            <div class="rating-item">
+                <span class="rating-label">Experience</span>
+                <span class="rating-value">{{ driver_rating.experience }}/100</span>
+            </div>
+            <div class="rating-item">
+                <span class="rating-label">Racecraft</span>
+                <span class="rating-value">{{ driver_rating.racecraft }}/100</span>
+            </div>
+            <div class="rating-item">
+                <span class="rating-label">Awareness</span>
+                <span class="rating-value">{{ driver_rating.awareness }}/100</span>
+            </div>
+        </div>
+    </div>
 
     <div class="page-actions">
         <a href="{{ path('app_driver_rating_index') }}" class="btn btn-outline">← Retour</a>

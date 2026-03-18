@@ -321,6 +321,11 @@ a { color: inherit; text-decoration: none; }
     color: var(--f1-red);
 }
 
+.btn-sm {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.75rem;
+}
+
 /* ===================== F1 Info Section ===================== */
 .f1-info {
     display: grid;
@@ -394,6 +399,100 @@ a { color: inherit; text-decoration: none; }
     text-decoration: underline;
 }
 
+.table-card {
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.table-card .table {
+    margin-bottom: 0;
+    border: none;
+}
+
+.table-link {
+    color: var(--f1-red);
+    font-weight: 600;
+}
+
+.table-actions {
+    white-space: nowrap;
+}
+
+.table-actions .btn {
+    margin-right: 0.5rem;
+}
+
+.table-actions .btn:last-child {
+    margin-right: 0;
+}
+
+.table-empty {
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    padding: 2rem !important;
+}
+
+/* ===================== Show card (detail pages) ===================== */
+.show-card {
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-radius: var(--border-radius);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.show-dl {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0.75rem 2rem;
+}
+
+.show-dl dt {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--f1-red);
+}
+
+.show-dl dd {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.rating-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.rating-item {
+    background: var(--f1-carbon);
+    border: 1px solid var(--f1-gray);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.rating-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.6);
+}
+
+.rating-value {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--f1-red);
+}
+
 /* ===================== Page Content ===================== */
 .page-content {
     width: 100%;
@@ -416,6 +515,12 @@ a { color: inherit; text-decoration: none; }
     text-transform: uppercase;
 }
 
+.page-subtitle {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    margin-top: 0.35rem;
+}
+
 .page-actions {
     display: flex;
     gap: 0.75rem;
@@ -432,12 +537,64 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ===================== Forms ===================== */
+.form-card {
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    margin-bottom: 0.4rem;
+}
+
+.form-actions {
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--f1-gray);
+}
+
+.form-check-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.form-check-row label {
+    margin-bottom: 0;
+    order: 2;
+}
+
+.form-check-input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--f1-red);
+    cursor: pointer;
+}
+
 .form-control,
 input[type="text"],
 input[type="number"],
 input[type="email"],
 input[type="date"],
 input[type="search"],
+input[type="url"],
+input[type="color"],
 select,
 textarea {
     background: var(--f1-carbon);
@@ -447,11 +604,32 @@ textarea {
     padding: 0.6rem 0.75rem;
     font-family: var(--font);
     font-size: 0.9rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+input[type="color"] {
+    height: 2.5rem;
+    padding: 0.25rem;
+    cursor: pointer;
 }
 
 input:focus, select:focus, textarea:focus {
     outline: none;
     border-color: var(--f1-red);
+}
+
+.form-group .form-error-message,
+.form-group ul.form-error-message {
+    list-style: none;
+    padding: 0;
+    margin: 0.35rem 0 0;
+}
+
+.form-group .form-error-message li,
+.form-group ul.form-error-message li {
+    font-size: 0.8rem;
+    color: var(--f1-red);
 }
 
 label {
@@ -797,6 +975,24 @@ label {
     margin-right: 0.5rem;
 }
 
+.team-show-description,
+.show-description {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--f1-gray);
+}
+
+.team-show-description .section-title,
+.show-description .section-title {
+    margin-bottom: 0.75rem;
+}
+
+.team-show-description,
+.show-description {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
 .team-show-car img {
     max-width: 100%;
     height: auto;
@@ -822,18 +1018,19 @@ label {
     --color: rgba(114, 114, 114, 0.3);
     display: flex;
     flex-direction: column;
-    background-color: var(--team-color);
+    background-color: var(--f1-dark);
     background-image:
+        linear-gradient(90deg, color-mix(in srgb, var(--team-color) 25%, var(--f1-dark)) 0%, var(--team-color) 100%),
         linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
         linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
-    background-size: 55px 55px;
+    background-size: 100% 100%, 55px 55px, 55px 55px;
     border: 1px solid var(--f1-gray);
     border-radius: 10px;
     overflow: hidden;
     transition: border-color 0.2s, transform 0.2s;
     text-decoration: none;
     color: var(--f1-white);
-    min-height: 140px;
+    min-height: 180px;
 }
 
 .driver-card:hover {
@@ -851,13 +1048,13 @@ label {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1rem 1rem 0.85rem;
+    padding: 0.9rem 1rem 0.75rem;
     min-width: 0;
     flex: 1;
 }
 
 .driver-card-name {
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
@@ -868,7 +1065,7 @@ label {
 }
 
 .driver-card-team {
-    font-size: 0.8rem;
+    font-size: 1.05rem;
     color: rgba(255, 255, 255, 0.75);
     margin-top: 0.15rem;
     white-space: nowrap;
@@ -877,7 +1074,7 @@ label {
 }
 
 .driver-card-number {
-    font-size: 2.2rem;
+    font-size: 3.2rem;
     font-weight: 900;
     line-height: 1;
     margin-top: auto;
@@ -886,8 +1083,8 @@ label {
 }
 
 .driver-card-flag {
-    width: 24px;
-    height: 18px;
+    width: 38px;
+    height: 28px;
     object-fit: cover;
     border-radius: 2px;
     margin-top: 0.35rem;
@@ -896,8 +1093,8 @@ label {
 .driver-card-photo-wrap {
     flex-shrink: 0;
     width: 50%;
-    max-width: 140px;
     min-height: 140px;
+    max-width: 180px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -905,16 +1102,322 @@ label {
 
 .driver-card-photo {
     width: 100%;
-    height: 100%;
-    min-height: 140px;
+    height: 200px;
     object-fit: cover;
-    object-position: bottom right;
+    object-position: top center;
 }
 
 .driver-card-placeholder {
     width: 100%;
-    min-height: 140px;
+    min-height: 180px;
+    height: 200px;
     background: rgba(255, 255, 255, 0.06);
+}
+
+/* ===================== Driver Show Banner ===================== */
+.driver-show-top-actions {
+    margin: 0 auto 0.75rem;
+    max-width: calc(100% - 36rem);
+}
+
+.driver-show-banner {
+    --team-color: var(--f1-dark);
+    --color: rgba(114, 114, 114, 0.3);
+    position: relative;
+    background-color: var(--team-color);
+    background-image:
+        linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+    background-size: 55px 55px;
+    border-radius: 10px;
+    border: 1px solid var(--f1-gray);
+    overflow: hidden;
+    margin: 0 auto 0.75rem;
+    max-width: calc(100% - 36rem);
+}
+
+.driver-show-content {
+    display: flex;
+    height: 500px;
+}
+
+.driver-show-left {
+    flex: 1;
+    padding: 0.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 0;
+    transform: translateX(-3rem);
+}
+
+.driver-show-firstname {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4.5rem;
+    font-weight: 600;
+    color: var(--f1-white);
+    display: block;
+}
+
+.driver-show-banner .driver-show-lastname {
+    font-size: 4rem !important;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--f1-white);
+    margin: 0.1rem 0 0.6rem;
+    line-height: 1;
+}
+
+.driver-show-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.75rem;
+}
+
+.driver-show-flag {
+    width: 48px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.driver-show-sep {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 300;
+}
+
+.driver-show-number {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+
+.driver-show-right {
+    position: relative;
+    width: 22%;
+    overflow: hidden;
+    margin-right: 10rem;
+}
+
+.driver-show-bg-number {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.15);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.driver-show-photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    z-index: 1;
+}
+
+.driver-show-photo-placeholder {
+    width: 200px;
+    height: 280px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+}
+
+/* ===================== Driver Biography ===================== */
+.driver-bio {
+    margin: 0.75rem auto 0;
+    max-width: calc(100% - 36rem);
+}
+
+.driver-bio-top-bar {
+    width: 100%;
+    height: 35px;
+    margin-bottom: 1.5rem;
+    color: var(--f1-red);
+    transform: rotate(180deg);
+    transform-origin: center;
+}
+
+.driver-bio-title {
+    font-size: 2.6rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.driver-bio-stats {
+    display: flex;
+    gap: 5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.driver-bio-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.driver-bio-label {
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+}
+
+.driver-bio-stat strong {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.driver-bio-nationality {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.driver-bio-flag-round {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.driver-bio-flag-round img {
+    width: 56px;
+    height: 44px;
+    object-fit: cover;
+}
+
+.driver-bio-content {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.driver-bio-photo {
+    flex-shrink: 0;
+    width: 600px;
+    padding-left: 10rem;
+    padding-top: 4rem;
+}
+
+.driver-bio-photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.driver-bio-photo-placeholder {
+    width: 300px;
+    height: 350px;
+    background: var(--f1-dark);
+    border-radius: 8px;
+}
+
+.driver-bio-text {
+    flex: 1;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.1rem;
+    line-height: 1.75;
+}
+
+.driver-bio-empty {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+/* ===================== Driver Quote Block (en bas de page) ===================== */
+.driver-quote-block {
+    margin-top: 3rem;
+    padding: 2.5rem 3rem 2.5rem 3.5rem;
+    position: relative;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.driver-quote-icon {
+    display: block;
+    width: 48px;
+    height: 33px;
+    margin-bottom: 0.5rem;
+}
+
+.driver-quote-icon path {
+    fill: var(--f1-red);
+}
+
+.driver-quote-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--f1-white);
+    text-transform: uppercase;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    margin: 0;
+}
+
+.driver-quote-from {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+@media (max-width: 800px) {
+    .driver-bio-content {
+        flex-direction: column;
+    }
+
+    .driver-bio-photo {
+        width: 100%;
+        max-width: 360px;
+        padding-left: 0;
+    }
+
+    .driver-bio-stats {
+        gap: 1.5rem;
+    }
+
+    .driver-quote-block {
+        max-width: 100%;
+        padding: 1.75rem 1.5rem;
+    }
+
+    .driver-quote-icon {
+        width: 36px;
+        height: 25px;
+    }
+
+    .driver-quote-text {
+        font-size: 1.35rem;
+        font-weight: 900;
+    }
 }
 
 @media (max-width: 1100px) {
@@ -960,6 +1463,32 @@ label {
     .team-grid,
     .driver-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .driver-show-content {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .driver-show-left {
+        padding: 1.5rem;
+    }
+
+    .driver-show-right {
+        width: 100%;
+        max-width: none;
+        min-height: 200px;
+        justify-content: center;
+    }
+
+    .driver-show-bg-number {
+        font-size: 6rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+
+    .driver-show-banner .driver-show-lastname {
+        font-size: 2.25rem !important;
     }
 }
 

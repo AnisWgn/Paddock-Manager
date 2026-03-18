@@ -1,39 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Game index{% endblock %}
+{% block title %}Grands Prix{% endblock %}
 
 {% block body %}
-    <h1>Grands Prix</h1>
+    <div class="page-header">
+        <h1>Grands Prix</h1>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Year</th>
-                <th>Platform</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for game in games %}
-            <tr>
-                <td>{{ game.id }}</td>
-                <td>{{ game.title }}</td>
-                <td>{{ game.year }}</td>
-                <td>{{ game.platform }}</td>
-                <td>
-                    <a href="{{ path('app_game_show', {'id': game.id}) }}">show</a>
-                    <a href="{{ path('app_game_edit', {'id': game.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Année</th>
+                    <th>Plateforme</th>
+                    <th class="table-actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for game in games %}
+                <tr>
+                    <td>{{ game.id }}</td>
+                    <td><a href="{{ path('app_game_show', {'id': game.id}) }}" class="table-link">{{ game.title }}</a></td>
+                    <td>{{ game.year }}</td>
+                    <td>{{ game.platform }}</td>
+                    <td class="table-actions">
+                        <a href="{{ path('app_game_show', {'id': game.id}) }}" class="btn btn-outline btn-sm">Voir</a>
+                        <a href="{{ path('app_game_edit', {'id': game.id}) }}" class="btn btn-f1 btn-sm">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="table-empty">Aucun Grand Prix pour le moment.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <div class="page-actions">
         <a href="{{ path('app_game_new') }}" class="btn btn-f1">+ Nouveau Grand Prix</a>

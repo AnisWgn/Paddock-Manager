@@ -18,7 +18,7 @@ final class DriverController extends AbstractController
     public function index(DriverRepository $driverRepository): Response
     {
         return $this->render('driver/index.html.twig', [
-            'drivers' => $driverRepository->findAll(),
+            'drivers' => $driverRepository->findAllOrderedByTeam(),
         ]);
     }
 

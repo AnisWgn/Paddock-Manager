@@ -3,7 +3,9 @@
 {% block title %}Edit Driver{% endblock %}
 
 {% block body %}
-    <h1>Modifier {{ driver.firstName }} {{ driver.lastName }}</h1>
+    <div class="page-header">
+        <h1>Modifier {{ driver.firstName }} {{ driver.lastName }}</h1>
+    </div>
 
     {{ include('driver/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 

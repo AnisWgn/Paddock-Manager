@@ -31,6 +31,12 @@
                 </tr>
             </tbody>
         </table>
+        {% if team.description %}
+            <div class="team-show-description">
+                <h3 class="section-title">Description</h3>
+                {{ team.description|nl2br }}
+            </div>
+        {% endif %}
         {% if team.carImage %}
             <div class="team-show-car">
                 <img src="{{ team.carImage }}" alt="{{ team.name }}">

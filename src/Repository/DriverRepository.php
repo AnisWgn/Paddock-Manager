@@ -16,6 +16,19 @@ class DriverRepository extends ServiceEntityRepository
         parent::__construct($registry, Driver::class);
     }
 
+    /**
+     * @return Driver[]
+     */
+    public function findAllOrderedByTeam(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->leftJoin('d.team', 't')
+            ->orderBy('t.id', 'ASC')
+            ->addOrderBy('d.lastName', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Driver[] Returns an array of Driver objects
     //     */

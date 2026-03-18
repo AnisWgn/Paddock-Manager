@@ -34,7 +34,7 @@ class Driver
     #[ORM\Column(length: 3)]
     private ?string $code = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
     #[ORM\Column]
@@ -51,6 +51,18 @@ class Driver
      */
     #[ORM\OneToMany(targetEntity: DriverRating::class, mappedBy: 'driver')]
     private Collection $driverRatings;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $quotes = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageBiography = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $quotesFrom = null;
 
     public function __construct()
     {
@@ -139,7 +151,7 @@ class Driver
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): static
+    public function setPhoto(?string $photo): static
     {
         $this->photo = $photo;
 
@@ -208,6 +220,54 @@ class Driver
                 $driverRating->setDriver(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getQuotes(): ?string
+    {
+        return $this->quotes;
+    }
+
+    public function setQuotes(?string $quotes): static
+    {
+        $this->quotes = $quotes;
+
+        return $this;
+    }
+
+    public function getImageBiography(): ?string
+    {
+        return $this->imageBiography;
+    }
+
+    public function setImageBiography(?string $imageBiography): static
+    {
+        $this->imageBiography = $imageBiography;
+
+        return $this;
+    }
+
+    public function getQuotesFrom(): ?string
+    {
+        return $this->quotesFrom;
+    }
+
+    public function setQuotesFrom(?string $quotesFrom): static
+    {
+        $this->quotesFrom = $quotesFrom;
 
         return $this;
     }
