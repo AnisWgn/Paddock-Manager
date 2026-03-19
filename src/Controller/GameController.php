@@ -45,8 +45,12 @@ final class GameController extends AbstractController
     #[Route('/{id}', name: 'app_game_show', methods: ['GET'])]
     public function show(Game $game): Response
     {
+        $ratings = $game->getDriverRatings()->toArray();
+        usort($ratings, fn ($a, $b) => ($b->getOverall() ?? 0) <=> ($a->getOverall() ?? 0));
+
         return $this->render('game/show.html.twig', [
             'game' => $game,
+            'driver_ratings' => $ratings,
         ]);
     }
 

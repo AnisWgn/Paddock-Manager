@@ -23,8 +23,8 @@
         <div>
             <span class="section-title">Classements</span>
             <p class="home-intro-text">
-                Retrouvez un affichage inspiré du site officiel de la F1 avec un classement pilotes
-                et un classement écuries basés sur les notes enregistrées dans l'application.
+                Retrouvez le classement des pilotes avec leurs notes (Global, Rythme, Expérience, Combat, Conscience)
+                pour tous les jeux enregistrés dans l'application.
             </p>
         </div>
         <div class="home-intro-stats">
@@ -43,67 +43,132 @@
         </div>
     </section>
 
+    {% set flagCodes = {
+        'British': 'gb', 'Britannique': 'gb', 'UK': 'gb', 'United Kingdom': 'gb',
+        'French': 'fr', 'France': 'fr', 'Français': 'fr',
+        'Dutch': 'nl', 'Netherlands': 'nl', 'Néerlandais': 'nl',
+        'German': 'de', 'Germany': 'de', 'Allemand': 'de',
+        'Spain': 'es', 'Spanish': 'es', 'Espagnol': 'es',
+        'Italian': 'it', 'Italy': 'it', 'Italien': 'it',
+        'Australian': 'au', 'Australien': 'au',
+        'Canadian': 'ca', 'Canadien': 'ca',
+        'American': 'us', 'Américain': 'us', 'USA': 'us',
+        'Brazilian': 'br', 'Brésilien': 'br', 'Brazil': 'br',
+        'Monegasque': 'mc', 'Monaco': 'mc',
+        'Mexican': 'mx', 'Mexicain': 'mx', 'Mexico': 'mx',
+        'Thai': 'th', 'Thailand': 'th',
+        'Japanese': 'jp', 'Japonais': 'jp', 'Japan': 'jp',
+        'China': 'cn', 'Chinese': 'cn', 'Chinois': 'cn',
+        'Danish': 'dk', 'Danois': 'dk', 'Denmark': 'dk',
+        'Finnish': 'fi', 'Finlandais': 'fi', 'Finland': 'fi',
+        'New Zealander': 'nz', 'Néo-Zélandais': 'nz', 'New Zealand': 'nz',
+        'Austrian': 'at', 'Autrichien': 'at', 'Austria': 'at',
+        'Belgian': 'be', 'Belge': 'be', 'Belgium': 'be',
+        'Swiss': 'ch', 'Suisse': 'ch', 'Switzerland': 'ch'
+    } %}
     <section class="standings-grid">
-        <article class="standings-card">
+        <article class="standings-card" style="grid-column: 1 / -1;">
             <div class="standings-card-header">
                 <div>
                     <span class="standings-kicker">FIA Formula 1</span>
-                    <h2>Classement pilotes</h2>
+                    <h2>Classement pilotes (tous les jeux)</h2>
                 </div>
-                <a href="{{ path('app_driver_index') }}" class="btn btn-outline">Voir tous les pilotes</a>
-            </div>
-
-            <div class="f1-standings-table">
-                {% for standing in driver_standings %}
-                    <a href="{{ path('app_driver_show', {'id': standing.driver.id}) }}" class="f1-standings-row">
-                        <div class="standing-position">{{ standing.position }}</div>
-                        <div class="standing-main">
-                            <div class="standing-title">{{ standing.name }}</div>
-                            <div class="standing-meta">
-                                <span>{{ standing.team }}</span>
-                                <span>{{ standing.code }}</span>
-                                <span>{{ standing.country }}</span>
-                            </div>
-                        </div>
-                        <div class="standing-points">
-                            <strong>{{ standing.points }}</strong>
-                            <span>PTS</span>
-                        </div>
-                    </a>
-                {% else %}
-                    <div class="standings-empty">Aucun pilote disponible pour le moment.</div>
-                {% endfor %}
-            </div>
-        </article>
-
-        <article class="standings-card">
-            <div class="standings-card-header">
-                <div>
-                    <span class="standings-kicker">FIA Formula 1</span>
-                    <h2>Classement écuries</h2>
+                <div class="flex gap-2">
+                    <a href="{{ path('app_driver_index') }}" class="btn btn-outline">Voir tous les pilotes</a>
+                    <a href="{{ path('app_game_index') }}" class="btn btn-outline">Voir tous les jeux</a>
                 </div>
-                <a href="{{ path('app_team_index') }}" class="btn btn-outline">Voir toutes les écuries</a>
             </div>
 
-            <div class="f1-standings-table">
-                {% for standing in team_standings %}
-                    <a href="{{ path('app_team_show', {'id': standing.team.id}) }}" class="f1-standings-row">
-                        <div class="standing-position">{{ standing.position }}</div>
-                        <div class="standing-main">
-                            <div class="standing-title">{{ standing.name }}</div>
-                            <div class="standing-meta">
-                                <span>{{ standing.country }}</span>
-                                <span>{{ standing.driversCount }} pilote(s)</span>
-                            </div>
-                        </div>
-                        <div class="standing-points">
-                            <strong>{{ standing.points }}</strong>
-                            <span>PTS</span>
-                        </div>
-                    </a>
-                {% else %}
-                    <div class="standings-empty">Aucune écurie disponible pour le moment.</div>
-                {% endfor %}
+            <div class="bg-gray-900 rounded-2xl border-2 border-gray-800 shadow-xl overflow-x-auto m-4">
+                <table class="w-full text-left text-sm font-sans-tech min-w-[950px]">
+                    <thead class="bg-gray-800 border-b-2 border-gray-700">
+                        <tr class="text-gray-400 font-bold uppercase tracking-wider">
+                            <th class="px-4 py-2 w-16">Pos</th>
+                            <th class="px-4 py-2">Pilote</th>
+                            <th class="px-4 py-2">Écurie</th>
+                            <th class="px-4 py-2">Jeux</th>
+                            <th class="px-4 py-2 w-24">Global</th>
+                            <th class="px-4 py-2">Rythme</th>
+                            <th class="px-4 py-2">Expérience</th>
+                            <th class="px-4 py-2">Combat</th>
+                            <th class="px-4 py-2">Conscience</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800">
+                        {% for rating in driver_ratings|default([]) %}
+                            <tr class="hover:bg-gray-800 transition-colors">
+                                <td class="px-4 py-2 font-f1-numeric font-black italic text-3xl text-gray-500">
+                                    {{ loop.index }}
+                                </td>
+                                <td class="px-4 py-2">
+                                    <div class="flex items-center gap-3">
+                                        {% if rating.driver and rating.driver.photo %}
+                                            <div class="w-16 h-16 overflow-hidden shrink-0">
+                                                <img src="{{ rating.driver.photo }}" alt="" class="w-full h-full object-cover object-[50%_0%] scale-150 origin-top">
+                                            </div>
+                                        {% else %}
+                                            <div class="w-16 h-16 bg-gray-700 flex items-center justify-center font-mono text-xs text-gray-500 uppercase">
+                                                {% if rating.driver %}
+                                                    {{ (rating.driver.firstName ~ ' ' ~ rating.driver.lastName)|slice(0, 3) }}
+                                                {% else %}
+                                                    —
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                        <span class="font-bold text-white text-base">
+                                            {% if rating.driver %}
+                                                {{ rating.driver.firstName }} {{ rating.driver.lastName }}
+                                            {% else %}
+                                                —
+                                            {% endif %}
+                                        </span>
+                                        {% if rating.driver and rating.driver.nationality and rating.driver.nationality in flagCodes %}
+                                            <img src="https://flagcdn.com/w40/{{ flagCodes[rating.driver.nationality] }}.png" alt="" class="w-6 h-4 object-cover rounded border border-gray-600">
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td class="px-4 py-2">
+                                    {% if rating.driver and rating.driver.team %}
+                                        <div class="flex items-center gap-3">
+                                            {% if rating.driver.team.logo and (rating.driver.team.logo starts with 'http' or rating.driver.team.logo starts with '/') %}
+                                                <img src="{{ rating.driver.team.logo }}" alt="" class="w-8 h-8 object-contain rounded-md">
+                                            {% endif %}
+                                            <span class="text-gray-300">{{ rating.driver.team.name }}</span>
+                                        </div>
+                                    {% else %}
+                                        <span class="text-gray-500">—</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-4 py-2">
+                                    {% if rating.game %}
+                                        <a href="{{ path('app_game_show', {'id': rating.game.id}) }}" class="text-cyan-400 hover:text-cyan-300 font-semibold">{{ rating.game.title }}</a>
+                                    {% else %}
+                                        <span class="text-gray-500">—</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-4 py-2 font-f1-numeric font-black text-4xl text-red-600">
+                                    {{ rating.overall ?? '—' }}
+                                </td>
+                                {% for stat in [rating.pace ?? 0, rating.experience ?? 0, rating.racecraft ?? 0, rating.awareness ?? 0] %}
+                                    <td class="px-4 py-2">
+                                        <div class="flex flex-col items-center gap-1.5">
+                                            <span class="font-mono text-2xl font-bold text-gray-300">{{ stat }}</span>
+                                            <div class="w-full h-2.5 bg-gray-700 rounded-full overflow-hidden min-w-[80px]">
+                                                <div class="h-full bg-cyan-400 rounded-full transition-all" style="width: {{ stat }}%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="9" class="px-4 py-8 text-center text-gray-500 italic">
+                                    Aucune note pilote pour le moment.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </article>
     </section>

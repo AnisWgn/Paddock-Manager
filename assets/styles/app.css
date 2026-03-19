@@ -37,6 +37,8 @@ a { color: inherit; text-decoration: none; }
     flex: 1;
     margin-left: var(--sidebar-width);
     padding: 2rem 2.5rem;
+    overflow-x: hidden;
+    max-width: calc(100vw - var(--sidebar-width));
 }
 
 /* ===================== Sidebar ===================== */
@@ -633,6 +635,394 @@ a { color: inherit; text-decoration: none; }
     flex-shrink: 0;
 }
 
+/* ===================== Game Index Grid ===================== */
+.game-page {
+    padding: 0;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.game-card-wrapper {
+    position: relative;
+}
+
+.game-card-admin-actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 5;
+}
+
+.game-card {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border: 1px solid var(--f1-gray);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: var(--f1-white);
+}
+
+.game-card:hover {
+    border-color: var(--f1-red);
+    transform: translateY(-3px);
+}
+
+.game-card-cover {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.game-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-card-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 120px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.game-card-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    background: transparent;
+}
+
+.game-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.game-card-year {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--f1-red);
+    font-variant-numeric: tabular-nums;
+}
+
+.game-card-platforms {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===================== Game Show ===================== */
+.game-show-top-actions {
+    margin: 0 auto 0.75rem;
+    max-width: calc(100% - 36rem);
+}
+
+.game-show-header {
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-top: 3px solid var(--f1-red);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    max-width: calc(100% - 36rem);
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    align-items: start;
+}
+
+.game-show-header-left {
+    flex-shrink: 0;
+}
+
+.game-show-cover-wrap {
+    width: 180px;
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.game-show-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-show-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.game-show-header-center {
+    min-width: 0;
+}
+
+.game-show-title {
+    font-size: 1.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--f1-white);
+    margin: 0 0 0.5rem;
+}
+
+.game-show-title-accent {
+    color: var(--f1-red);
+}
+
+.game-show-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 1.25rem;
+}
+
+.game-show-platforms-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.game-show-platforms-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.game-show-platform-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.game-show-platform-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--f1-white);
+}
+
+.game-show-header-right {
+    min-width: 0;
+}
+
+.game-show-details-title {
+    font-size: 0.9rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--f1-red);
+    margin: 0 0 1rem;
+}
+
+.game-show-detail {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 0.5rem;
+}
+
+.game-show-detail strong {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+}
+
+.game-show-detail-block {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 1rem;
+}
+
+.game-show-detail-block strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.game-show-description-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Game Show Ratings Table */
+.game-show-ratings-section {
+    margin: 0 auto 1.5rem;
+    max-width: calc(100% - 36rem);
+}
+
+.game-show-ratings-title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--f1-white);
+    margin: 0 0 1rem;
+}
+
+.game-show-ratings-table-wrap {
+    background: var(--f1-dark);
+    border: 1px solid var(--f1-gray);
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+}
+
+.game-show-ratings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.game-show-ratings-table th {
+    text-align: left;
+    padding: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid var(--f1-gray);
+}
+
+.game-show-ratings-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.game-show-ratings-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.game-show-ratings-empty {
+    text-align: center;
+    padding: 2rem !important;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+.game-show-pos {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    width: 50px;
+}
+
+.game-show-pilote-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.game-show-pilote-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.game-show-pilote-photo-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.game-show-pilote-name {
+    font-weight: 600;
+}
+
+.game-show-pilote-flag {
+    border-radius: 2px;
+    object-fit: cover;
+}
+
+.game-show-ecurie-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.game-show-ecurie-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.game-show-global {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+}
+
+.game-show-gauge-cell {
+    width: 90px;
+}
+
+.game-show-gauge {
+    position: relative;
+    width: 56px;
+    height: 28px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 2px;
+    overflow: hidden;
+    border-radius: 28px 28px 0 0;
+}
+
+.game-show-gauge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(from 180deg, #00d4aa 0deg calc(var(--gauge-value, 0) * 1.8deg), rgba(255,255,255,0.12) calc(var(--gauge-value, 0) * 1.8deg) 180deg);
+    border-radius: 28px 28px 0 0;
+}
+
+.game-show-gauge-value {
+    position: relative;
+    z-index: 2;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.game-show-footer-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin: 0 auto 1.5rem;
+    max-width: calc(100% - 36rem);
+    padding: 1rem 0;
+    border-top: 1px solid var(--f1-gray);
+}
+
+.game-show-footer-actions .btn {
+    margin: 0;
+}
+
 /* ===================== Forms ===================== */
 .form-card {
     background: var(--f1-dark);
@@ -1119,6 +1509,8 @@ label {
     justify-content: center;
     gap: 2rem;
     margin-bottom: 1rem;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .team-show-line {
@@ -1137,6 +1529,8 @@ label {
     letter-spacing: 0.15em;
     color: var(--f1-white);
     margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .team-show-drivers-names {
@@ -1147,7 +1541,7 @@ label {
 
 .team-show-drivers-section {
     margin: 0 auto 2rem;
-    max-width: calc(100% - 36rem);
+    max-width: calc(100% - 4rem);
 }
 
 .team-show-drivers-title {
@@ -1158,8 +1552,7 @@ label {
     margin-bottom: 1.25rem;
 }
 
-.team-show-drivers-grid {
-    display: grid;
+.team-show-drivers-grid.driver-grid {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     margin-bottom: 0;
@@ -1167,8 +1560,7 @@ label {
 
 .team-show-drivers-grid .driver-card {
     min-height: 260px;
-    width: 750px;
-    margin-left: 26px; 
+    width: 100%;
 }
 
 .team-show-drivers-grid .driver-card-content {
@@ -1197,6 +1589,7 @@ label {
 .team-bio {
     margin: 0.75rem auto 0;
     max-width: calc(100% - 36rem);
+    overflow: hidden;
 }
 
 .team-bio-top-bar {
@@ -1220,7 +1613,7 @@ label {
 .team-bio-stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2.5rem 6rem;
+    gap: 2.5rem 3rem;
     margin-bottom: 2rem;
 }
 
@@ -1230,6 +1623,8 @@ label {
 
 .team-bio-stats-row .team-bio-stat {
     min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .team-bio-stat {
@@ -1255,12 +1650,14 @@ label {
     display: flex;
     gap: 2rem;
     align-items: flex-start;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .team-bio-photo {
     flex-shrink: 0;
-    width: 600px;
-    padding-left: 10rem;
+    width: 40%;
+    max-width: 500px;
     padding-top: 4rem;
 }
 
@@ -1760,6 +2157,27 @@ label {
     margin-bottom: 0;
 }
 
+/* 1080p : espacement latéral réduit sur show driver, team et game */
+@media (min-width: 1080px) and (max-width: 2200px) {
+    .driver-show-top-actions,
+    .driver-show-banner,
+    .driver-bio,
+    .show-footer-image,
+    .team-show-top-actions,
+    .team-show-hero,
+    .team-bio,
+    .game-show-top-actions,
+    .game-show-header,
+    .game-show-ratings-section,
+    .game-show-footer-actions {
+        max-width: calc(100% - 12rem);
+    }
+
+    .team-show-drivers-section {
+        max-width: calc(100% - 4rem);
+    }
+}
+
 @media (max-width: 800px) {
     .driver-bio-content {
         flex-direction: column;
@@ -1793,6 +2211,49 @@ label {
     .show-footer-image {
         max-width: 100%;
     }
+
+    .game-show-header {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+
+    .game-show-cover-wrap {
+        width: 100%;
+        max-width: 200px;
+        aspect-ratio: 3 / 4;
+    }
+
+    .game-show-top-actions,
+    .game-show-ratings-section,
+    .game-show-footer-actions {
+        max-width: 100%;
+    }
+
+    .game-show-ratings-table-wrap {
+        overflow-x: auto;
+    }
+
+    .game-show-ratings-table {
+        font-size: 0.8rem;
+    }
+
+    .game-show-ratings-table th,
+    .game-show-ratings-table td {
+        padding: 0.5rem 0.4rem;
+    }
+
+    .game-show-gauge-cell {
+        width: 70px;
+    }
+
+    .game-show-gauge {
+        width: 48px;
+        height: 24px;
+    }
+
+    .game-show-gauge::before {
+        border-radius: 24px 24px 0 0;
+    }
 }
 
 @media (max-width: 1100px) {
@@ -1801,7 +2262,8 @@ label {
     }
 
     .team-grid,
-    .driver-grid {
+    .driver-grid,
+    .game-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
@@ -1836,7 +2298,8 @@ label {
 
 @media (max-width: 700px) {
     .team-grid,
-    .driver-grid {
+    .driver-grid,
+    .game-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 

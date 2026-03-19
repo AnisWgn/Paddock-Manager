@@ -19,6 +19,10 @@ class GameType extends AbstractType
         $builder
             ->add('title', TextType::class, ['label' => 'Titre'])
             ->add('year', IntegerType::class, ['label' => 'Année'])
+            ->add('image', TextType::class, [
+                'label' => 'Image (URL)',
+                'required' => false,
+            ])
             ->add('platforms', EntityType::class, [
                 'class' => Plateforme::class,
                 'choice_label' => 'name',

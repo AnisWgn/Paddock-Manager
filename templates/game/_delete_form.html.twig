@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('app_game_delete', {'id': game.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Grand Prix ?');" style="display:inline;">
+<form method="post" action="{{ path('app_game_delete', {'id': game.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Grand Prix ?');" class="inline">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ game.id) }}">
-    <button class="btn btn-outline" style="color:#e10600;">Supprimer</button>
+    <button type="submit" class="px-6 py-3 bg-red-700 text-white rounded-full font-bold uppercase tracking-wider hover:bg-red-600 transition {{ compact|default(false) ? 'text-sm px-4 py-2' : '' }}">Supprimer</button>
 </form>

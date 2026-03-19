@@ -3,55 +3,42 @@
 {% block title %}Grands Prix{% endblock %}
 
 {% block body %}
-    <div class="page-header">
-        <h1>Grands Prix</h1>
-    </div>
+    <div class="game-page">
+        <div class="page-header">
+            <h1>Grands Prix</h1>
+        </div>
 
-    <div class="table-card">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Titre</th>
-                    <th>Année</th>
-                    <th>Plateforme</th>
-                    <th class="table-actions">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="game-grid">
             {% for game in games %}
-                <tr>
-                    <td>{{ game.id }}</td>
-                    <td><a href="{{ path('app_game_show', {'id': game.id}) }}" class="table-link">{{ game.title }}</a></td>
-                    <td>{{ game.year }}</td>
-                    <td>
-                        {% if game.platforms|length > 0 %}
-                            {% for plateform in game.platforms %}
-                                {% if loop.index < 4%}
-                                    {{ plateform.name }}{% if loop.index < 3 %}, {% endif %}
-                                {% else %}
-                                    {% if loop.last %}...{% endif %}
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            Aucune plateforme
-                        {% endif %}
-                    </td>
-                    <td class="table-actions">
-                        <a href="{{ path('app_game_show', {'id': game.id}) }}" class="btn btn-outline btn-sm">Voir</a>
-                        <a href="{{ path('app_game_edit', {'id': game.id}) }}" class="btn btn-f1 btn-sm">Modifier</a>
-                    </td>
-                </tr>
+                <div class="game-card-wrapper">
+                    <a href="{{ path('app_game_show', {'id': game.id}) }}" class="game-card">
+                        <div class="game-card-cover">
+                            {% if game.image %}
+                                <img src="{{ game.image }}" alt="{{ game.title }}" class="game-card-image">
+                            {% else %}
+                                <div class="game-card-placeholder"></div>
+                            {% endif %}
+                        </div>
+                        <div class="game-card-info">
+                            <h3 class="game-card-title">{{ game.title }}</h3>
+                        </div>
+                    </a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="game-card-admin-actions" onclick="event.stopPropagation();">
+                            <a href="{{ path('app_game_edit', {'id': game.id}) }}" class="btn btn-sm btn-outline">Modifier</a>
+                            {{ include('game/_delete_form.html.twig', {compact: true}) }}
+                        </div>
+                    {% endif %}
+                </div>
             {% else %}
-                <tr>
-                    <td colspan="5" class="table-empty">Aucun Grand Prix pour le moment.</td>
-                </tr>
+                <p class="standings-empty">Aucun Grand Prix pour le moment.</p>
             {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        </div>
 
-    <div class="page-actions">
-        <a href="{{ path('app_game_new') }}" class="btn btn-f1">+ Nouveau Grand Prix</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="page-actions">
+                <a href="{{ path('app_game_new') }}" class="btn btn-f1">+ Nouveau Grand Prix</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

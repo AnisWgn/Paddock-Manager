@@ -30,6 +30,9 @@ class Plateforme
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'platforms')]
     private Collection $games;
 
+    #[ORM\Column(length: 255)]
+    private ?string $logo = null;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
@@ -99,6 +102,18 @@ class Plateforme
         if ($this->games->removeElement($game)) {
             $game->removePlatform($this);
         }
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): static
+    {
+        $this->logo = $logo;
 
         return $this;
     }

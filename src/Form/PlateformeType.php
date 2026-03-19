@@ -17,6 +17,7 @@ class PlateformeType extends AbstractType
             ->add('name')
             ->add('manufacturer')
             ->add('color')
+            ->add('logo')
         ;
     }
 

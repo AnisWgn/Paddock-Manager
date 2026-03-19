@@ -40,6 +40,15 @@ class Game
     #[ORM\ManyToMany(targetEntity: Plateforme::class, inversedBy: 'games')]
     private Collection $platforms;
 
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Editeur = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $DateDeSortie = null;
+
     public function __construct()
     {
         $this->driverRatings = new ArrayCollection();
@@ -149,6 +158,42 @@ class Game
     public function removePlatform(Plateforme $platform): static
     {
         $this->platforms->removeElement($platform);
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getEditeur(): ?string
+    {
+        return $this->Editeur;
+    }
+
+    public function setEditeur(string $Editeur): static
+    {
+        $this->Editeur = $Editeur;
+
+        return $this;
+    }
+
+    public function getDateDeSortie(): ?string
+    {
+        return $this->DateDeSortie;
+    }
+
+    public function setDateDeSortie(string $DateDeSortie): static
+    {
+        $this->DateDeSortie = $DateDeSortie;
 
         return $this;
     }
